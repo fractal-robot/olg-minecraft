@@ -67,6 +67,7 @@ endif
 OBJECTS := \
 	$(OBJDIR)/glad.o \
 	$(OBJDIR)/glm.o \
+	$(OBJDIR)/Shader.o \
 	$(OBJDIR)/main.o \
 
 RESOURCES := \
@@ -130,6 +131,9 @@ $(OBJDIR)/glad.o: ../libs/glad/src/glad.c
 	@echo $(notdir $<)
 	$(SILENT) $(CC) $(ALL_CFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/glm.o: ../libs/glm/detail/glm.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Shader.o: ../src/Shader.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/main.o: ../src/main.cpp
