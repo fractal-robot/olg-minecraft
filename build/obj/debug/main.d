@@ -256,24 +256,7 @@ obj/debug/main.o: ../src/main.cpp /usr/include/stdc-predef.h \
  ../src/../libs/glm/gtc/../gtc/../ext/vector_uint1_sized.hpp \
  /usr/include/c++/13.2.1/cstring /usr/include/string.h \
  /usr/include/strings.h ../src/../libs/glm/gtc/type_ptr.inl \
- ../src/Camera.h ../src/../libs/glm/glm.hpp \
- ../src/../libs/glm/detail/_fixes.hpp ../src/../libs/glm/detail/setup.hpp \
- /usr/include/c++/13.2.1/climits \
- /usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/limits.h \
- /usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/syslimits.h \
- /usr/include/limits.h /usr/include/bits/posix1_lim.h \
- /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
- /usr/include/bits/pthread_stack_min-dynamic.h \
- /usr/include/bits/posix2_lim.h /usr/include/bits/xopen_lim.h \
- /usr/include/bits/uio_lim.h /usr/include/c++/13.2.1/cfloat \
- /usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/float.h \
- ../src/../libs/glm/fwd.hpp ../src/../libs/glm/packing.hpp \
- ../src/../libs/glm/detail/func_packing.inl \
- ../src/../libs/glm/detail/type_half.hpp \
- ../src/../libs/glm/detail/setup.hpp \
- ../src/../libs/glm/detail/type_half.inl ../src/../libs/glm/integer.hpp \
- ../src/../libs/glm/detail/func_integer.inl /usr/include/GLFW/glfw3.h \
- ../src/Shader.h /usr/include/c++/13.2.1/string \
+ ../src/Block.h /usr/include/c++/13.2.1/string \
  /usr/include/c++/13.2.1/bits/stringfwd.h \
  /usr/include/c++/13.2.1/bits/memoryfwd.h \
  /usr/include/c++/13.2.1/bits/char_traits.h \
@@ -323,10 +306,27 @@ obj/debug/main.o: ../src/main.cpp /usr/include/stdc-predef.h \
  /usr/include/c++/13.2.1/bits/memory_resource.h \
  /usr/include/c++/13.2.1/bits/uses_allocator.h \
  /usr/include/c++/13.2.1/bits/uses_allocator_args.h \
- /usr/include/c++/13.2.1/tuple ../src/Texture2D.h ../src/constants.h \
- ../src/debugger.h ../libs/glad/include/glad/glad.h \
- /usr/include/c++/13.2.1/iostream /usr/include/c++/13.2.1/ostream \
- /usr/include/c++/13.2.1/ios /usr/include/c++/13.2.1/exception \
+ /usr/include/c++/13.2.1/tuple ../src/Camera.h ../src/../libs/glm/glm.hpp \
+ ../src/../libs/glm/detail/_fixes.hpp ../src/../libs/glm/detail/setup.hpp \
+ /usr/include/c++/13.2.1/climits \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/limits.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/syslimits.h \
+ /usr/include/limits.h /usr/include/bits/posix1_lim.h \
+ /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
+ /usr/include/bits/pthread_stack_min-dynamic.h \
+ /usr/include/bits/posix2_lim.h /usr/include/bits/xopen_lim.h \
+ /usr/include/bits/uio_lim.h /usr/include/c++/13.2.1/cfloat \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/float.h \
+ ../src/../libs/glm/fwd.hpp ../src/../libs/glm/packing.hpp \
+ ../src/../libs/glm/detail/func_packing.inl \
+ ../src/../libs/glm/detail/type_half.hpp \
+ ../src/../libs/glm/detail/setup.hpp \
+ ../src/../libs/glm/detail/type_half.inl ../src/../libs/glm/integer.hpp \
+ ../src/../libs/glm/detail/func_integer.inl /usr/include/GLFW/glfw3.h \
+ ../src/Shader.h ../src/Texture2D.h ../src/constants.h ../src/debugger.h \
+ ../libs/glad/include/glad/glad.h /usr/include/c++/13.2.1/iostream \
+ /usr/include/c++/13.2.1/ostream /usr/include/c++/13.2.1/ios \
+ /usr/include/c++/13.2.1/exception \
  /usr/include/c++/13.2.1/bits/exception_ptr.h \
  /usr/include/c++/13.2.1/bits/cxxabi_init_exception.h \
  /usr/include/c++/13.2.1/typeinfo \
@@ -651,33 +651,7 @@ obj/debug/main.o: ../src/main.cpp /usr/include/stdc-predef.h \
 /usr/include/string.h:
 /usr/include/strings.h:
 ../src/../libs/glm/gtc/type_ptr.inl:
-../src/Camera.h:
-../src/../libs/glm/glm.hpp:
-../src/../libs/glm/detail/_fixes.hpp:
-../src/../libs/glm/detail/setup.hpp:
-/usr/include/c++/13.2.1/climits:
-/usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/limits.h:
-/usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/syslimits.h:
-/usr/include/limits.h:
-/usr/include/bits/posix1_lim.h:
-/usr/include/bits/local_lim.h:
-/usr/include/linux/limits.h:
-/usr/include/bits/pthread_stack_min-dynamic.h:
-/usr/include/bits/posix2_lim.h:
-/usr/include/bits/xopen_lim.h:
-/usr/include/bits/uio_lim.h:
-/usr/include/c++/13.2.1/cfloat:
-/usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/float.h:
-../src/../libs/glm/fwd.hpp:
-../src/../libs/glm/packing.hpp:
-../src/../libs/glm/detail/func_packing.inl:
-../src/../libs/glm/detail/type_half.hpp:
-../src/../libs/glm/detail/setup.hpp:
-../src/../libs/glm/detail/type_half.inl:
-../src/../libs/glm/integer.hpp:
-../src/../libs/glm/detail/func_integer.inl:
-/usr/include/GLFW/glfw3.h:
-../src/Shader.h:
+../src/Block.h:
 /usr/include/c++/13.2.1/string:
 /usr/include/c++/13.2.1/bits/stringfwd.h:
 /usr/include/c++/13.2.1/bits/memoryfwd.h:
@@ -743,6 +717,33 @@ obj/debug/main.o: ../src/main.cpp /usr/include/stdc-predef.h \
 /usr/include/c++/13.2.1/bits/uses_allocator.h:
 /usr/include/c++/13.2.1/bits/uses_allocator_args.h:
 /usr/include/c++/13.2.1/tuple:
+../src/Camera.h:
+../src/../libs/glm/glm.hpp:
+../src/../libs/glm/detail/_fixes.hpp:
+../src/../libs/glm/detail/setup.hpp:
+/usr/include/c++/13.2.1/climits:
+/usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/limits.h:
+/usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/syslimits.h:
+/usr/include/limits.h:
+/usr/include/bits/posix1_lim.h:
+/usr/include/bits/local_lim.h:
+/usr/include/linux/limits.h:
+/usr/include/bits/pthread_stack_min-dynamic.h:
+/usr/include/bits/posix2_lim.h:
+/usr/include/bits/xopen_lim.h:
+/usr/include/bits/uio_lim.h:
+/usr/include/c++/13.2.1/cfloat:
+/usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/float.h:
+../src/../libs/glm/fwd.hpp:
+../src/../libs/glm/packing.hpp:
+../src/../libs/glm/detail/func_packing.inl:
+../src/../libs/glm/detail/type_half.hpp:
+../src/../libs/glm/detail/setup.hpp:
+../src/../libs/glm/detail/type_half.inl:
+../src/../libs/glm/integer.hpp:
+../src/../libs/glm/detail/func_integer.inl:
+/usr/include/GLFW/glfw3.h:
+../src/Shader.h:
 ../src/Texture2D.h:
 ../src/constants.h:
 ../src/debugger.h:
