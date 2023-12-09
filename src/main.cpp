@@ -1,4 +1,3 @@
-
 #include "../libs/glad/include/glad/glad.h"
 #include "Shader.h"
 #include "constants.h"
