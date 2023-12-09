@@ -1,4 +1,6 @@
 #include "../libs/glad/include/glad/glad.h"
+#include "../libs/glm/gtc/matrix_transform.hpp"
+#include "../libs/glm/gtc/type_ptr.hpp"
 #include "Shader.h"
 #include "Texture2D.h"
 #include "constants.h"
@@ -56,6 +58,11 @@ int main() {
                 "../../res/shaders/shader.frag");
   shader.use();
 
+  Texture2D texture("../../res/textures/just-do-it.png", true);
+  glActiveTexture(GL_TEXTURE0);
+  texture.bind();
+  shader.setInt("tex", 0);
+
   float vertices[] = {
       // positions          // colors           // texture coords
       0.5f,  0.5f,  0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, // top right
@@ -63,6 +70,8 @@ int main() {
       -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, // bottom left
       -0.5f, 0.5f,  0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f  // top left
   };
+
+  unsigned int indices[]{0, 1, 2, 2, 3, 0};
 
   unsigned int VBO, VAO, EBO;
 
@@ -72,8 +81,11 @@ int main() {
 
   glBindVertexArray(VAO);
   glBindBuffer(GL_ARRAY_BUFFER, VBO);
+  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 
   glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+  glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices,
+               GL_STATIC_DRAW);
 
   glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), nullptr);
   glEnableVertexAttribArray(0);
@@ -82,16 +94,33 @@ int main() {
                         (void *)(6 * sizeof(float)));
   glEnableVertexAttribArray(1);
 
-  Texture2D texture("../../res/textures/just-do-it.png", true);
-  glActiveTexture(GL_TEXTURE0);
-  texture.bind();
-  shader.setInt("tex", 0);
+  glm::mat4 model{glm::mat4(1.0f)};
+  model = glm::rotate(model, glm::radians(-55.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 
+  glm::mat4 view = glm::mat4(1.0f);
+  view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+
+  glm::mat4 projection{
+      glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f)};
+
+  int modelLoc = glGetUniformLocation(shader.getID(), "model");
+  glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+
+  int projectionLoc = glGetUniformLocation(shader.getID(), "projection");
+  glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
+
+  int viewLoc = glGetUniformLocation(shader.getID(), "view");
+  glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+  /*
+    shader.setMatrix4("model", model);
+    shader.setMatrix4("view", view);
+    shader.setMatrix4("projection", projection);
+  */
   while (!glfwWindowShouldClose(window)) {
     processInput(window);
     glClear(GL_COLOR_BUFFER_BIT);
 
-    glDrawArrays(GL_TRIANGLES, 0, 6);
+    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
     glfwSwapBuffers(window);
     glfwPollEvents();
