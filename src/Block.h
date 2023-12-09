@@ -1,33 +1,17 @@
 #pragma once
 
+#include <map>
 #include <string>
+#include <vector>
 class Block {
 public:
-  Block(const std::string &blockName);
-  void getDescription();
+  std::map<std::string, float *> blocksVertexList;
 
-private:
-  float m_vertices[120] = {
+  Block(const std::string &jsonPath);
+  ~Block();
+
+  unsigned int indices[36] = {
       // Front
-      -0.5f, -0.5f, 0.5f, .0f, .0f, 0.5f, -0.5f, 0.5f, .0f, .0f, 0.5f, 0.5f,
-      0.5f, .0f, .0f, -0.5f, 0.5f, 0.5f, .0f, .0f,
-      // Back
-      0.5f, -0.5f, -0.5f, .0f, .0f, -0.5f, -0.5f, -0.5f, .0f, .0f, -0.5f, 0.5f,
-      -0.5f, .0f, .0f, 0.5f, 0.5f, -0.5f, .0f, .0f,
-      // Left
-      -0.5f, -0.5f, -0.5f, .0f, .0f, -0.5f, -0.5f, 0.5f, .0f, .0f, -0.5f, 0.5f,
-      0.5f, .0f, .0f, -0.5f, 0.5f, -0.5f, .0f, .0f,
-      // Right
-      0.5f, -0.5f, 0.5f, .0f, .0f, 0.5f, -0.5f, -0.5f, .0f, .0f, 0.5f, 0.5f,
-      -0.5f, .0f, .0f, 0.5f, 0.5f, 0.5f, .0f, .0f,
-      // Top
-      -0.5f, 0.5f, 0.5f, .0f, .0f, 0.5f, 0.5f, 0.5f, .0f, .0f, 0.5f, 0.5f,
-      -0.5f, .0f, .0f, -0.5f, 0.5f, -0.5f, .0f, .0f,
-      // Bottom
-      -0.5f, -0.5f, -0.5f, .0f, .0f, 0.5f, -0.5f, -0.5f, .0f, .0f, 0.5f, -0.5f,
-      0.5f, .0f, .0f, -0.5f, -0.5f, 0.5f, .0f, .0f};
-
-  unsigned int m_indices[36] = { // Front
       0, 1, 2, 2, 3, 0,
       // Back
       4, 5, 6, 6, 7, 4,
@@ -39,4 +23,21 @@ private:
       16, 17, 18, 18, 19, 16,
       // Bottom
       20, 21, 22, 22, 23, 20};
+
+private:
+  void createBlocksList(const std::string &jsonPath);
+
+  float m_vertices[120] = {
+      -0.5f, -0.5f, 0.5f,  .0f, .0f, 0.5f,  -0.5f, 0.5f,  .0f, .0f,
+      0.5f,  0.5f,  0.5f,  .0f, .0f, -0.5f, 0.5f,  0.5f,  .0f, .0f,
+      0.5f,  -0.5f, -0.5f, .0f, .0f, -0.5f, -0.5f, -0.5f, .0f, .0f,
+      -0.5f, 0.5f,  -0.5f, .0f, .0f, 0.5f,  0.5f,  -0.5f, .0f, .0f,
+      -0.5f, -0.5f, -0.5f, .0f, .0f, -0.5f, -0.5f, 0.5f,  .0f, .0f,
+      -0.5f, 0.5f,  0.5f,  .0f, .0f, -0.5f, 0.5f,  -0.5f, .0f, .0f,
+      0.5f,  -0.5f, 0.5f,  .0f, .0f, 0.5f,  -0.5f, -0.5f, .0f, .0f,
+      0.5f,  0.5f,  -0.5f, .0f, .0f, 0.5f,  0.5f,  0.5f,  .0f, .0f,
+      -0.5f, 0.5f,  0.5f,  .0f, .0f, 0.5f,  0.5f,  0.5f,  .0f, .0f,
+      0.5f,  0.5f,  -0.5f, .0f, .0f, -0.5f, 0.5f,  -0.5f, .0f, .0f,
+      -0.5f, -0.5f, -0.5f, .0f, .0f, 0.5f,  -0.5f, -0.5f, .0f, .0f,
+      0.5f,  -0.5f, 0.5f,  .0f, .0f, -0.5f, -0.5f, 0.5f,  .0f, .0f};
 };

@@ -14,7 +14,7 @@
 #include <math.h>
 
 Camera camera;
-Block block("frosted_ice_0", "../../res/textures/block_info.json");
+Block block("../../res/textures/block_info.json");
 
 float deltaTime = 0.0f;
 float lastFrame = 0.0f;
@@ -23,7 +23,7 @@ void framebufferSizeCallback(GLFWwindow *, int width, int height) {
   glViewport(0, 0, width, height);
 }
 
-void mouseCallback(GLFWwindow *window, double xPos, double yPos) {
+void mouseCallback(GLFWwindow *, double xPos, double yPos) {
   camera.processMouseMovement(xPos, yPos);
 };
 
@@ -40,7 +40,9 @@ void processInput(GLFWwindow *window) {
 
 int main() {
 
-  block.parseBlockProp();
+  for (auto e : block.blocksVertexList) {
+    std::cout << e.first << ' ' << e.second << '\n';
+  }
 
   glfwInit();
 
@@ -77,43 +79,10 @@ int main() {
                 "../../res/shaders/shader.frag");
   shader.use();
 
-  Texture2D texture("../../res/textures/just-do-it.png", true);
+  Texture2D texture("../../res/textures/texture_atlas.png", true);
   glActiveTexture(GL_TEXTURE0);
   texture.bind();
   shader.setInt("tex", 0);
-
-  float vertices[] = {
-      // Front.            Texture Coordinates
-      -0.5f, -0.5f, 0.5f, 0.0f, 0.0f, 0.5f, -0.5f, 0.5f, 0.5f, 0.0f, 0.5f, 0.5f,
-      0.5f, 0.5f, 0.5f, -0.5f, 0.5f, 0.5f, 0.0f, 0.5f,
-      // Back
-      0.5f, -0.5f, -0.5f, 0.0f, 0.0f, -0.5f, -0.5f, -0.5f, 0.5f, 0.0f, -0.5f,
-      0.5f, -0.5f, 0.5f, 0.5f, 0.5f, 0.5f, -0.5f, 0.0f, 0.5f,
-      // Left
-      -0.5f, -0.5f, -0.5f, 0.0f, 0.0f, -0.5f, -0.5f, 0.5f, 0.5f, 0.0f, -0.5f,
-      0.5f, 0.5f, 0.5f, 0.5f, -0.5f, 0.5f, -0.5f, 0.0f, 0.5f,
-      // Right
-      0.5f, -0.5f, 0.5f, 0.0f, 0.0f, 0.5f, -0.5f, -0.5f, 0.5f, 0.0f, 0.5f, 0.5f,
-      -0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.0f, 0.5f,
-      // Top
-      -0.5f, 0.5f, 0.5f, 0.0f, 0.0f, 0.5f, 0.5f, 0.5f, 0.5f, 0.0f, 0.5f, 0.5f,
-      -0.5f, 0.5f, 0.5f, -0.5f, 0.5f, -0.5f, 0.0f, 0.5f,
-      // Bottom
-      -0.5f, -0.5f, -0.5f, 0.0f, 0.0f, 0.5f, -0.5f, -0.5f, 0.5f, 0.0f, 0.5f,
-      -0.5f, 0.5f, 0.5f, 0.5f, -0.5f, -0.5f, 0.5f, 0.0f, 0.5f};
-
-  unsigned int indices[] = {// Front
-                            0, 1, 2, 2, 3, 0,
-                            // Back
-                            4, 5, 6, 6, 7, 4,
-                            // Left
-                            8, 9, 10, 10, 11, 8,
-                            // Right
-                            12, 13, 14, 14, 15, 12,
-                            // Top
-                            16, 17, 18, 18, 19, 16,
-                            // Bottom
-                            20, 21, 22, 22, 23, 20};
 
   unsigned int VBO, VAO, EBO;
 
@@ -125,8 +94,9 @@ int main() {
   glBindBuffer(GL_ARRAY_BUFFER, VBO);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 
-  glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-  glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices,
+  glBufferData(GL_ARRAY_BUFFER, 120 * sizeof(float),
+               block.blocksVertexList["stone"], GL_STATIC_DRAW);
+  glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(block.indices), block.indices,
                GL_STATIC_DRAW);
 
   glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), nullptr);

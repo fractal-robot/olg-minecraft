@@ -1,17 +1,24 @@
 #include "Block.h"
+#include <algorithm>
 #include <fstream>
 #include <iostream>
 #include <nlohmann/json.hpp>
+#include <utility>
 
-Block::Block(const std::string &blockName, const std::string &jsonPath)
-    : m_blockName(blockName), m_jsonPath(jsonPath){};
+Block::Block(const std::string &jsonPath) { createBlocksList(jsonPath); };
 
-void Block::parseBlockProp() {
+Block::~Block() {
+  for (const auto &pair : blocksVertexList) {
+    delete[] pair.second;
+  }
+}
+
+void Block::createBlocksList(const std::string &jsonPath) {
   using json = nlohmann::json;
 
-  std::ifstream file(m_jsonPath);
+  std::ifstream file(jsonPath);
   if (!file.is_open())
-    std::cerr << "Block: unable to open json file.";
+    std::cerr << "Block: unable to open json file.\n";
 
   json data;
   file >> data;
@@ -19,21 +26,32 @@ void Block::parseBlockProp() {
   float texWidth{1.f / static_cast<float>(data["texture_atlas"]["rows"])};
   float texHeight{1.f / static_cast<float>(data["texture_atlas"]["columns"])};
 
-  int faceCounter;
+  int x, y;
 
-  auto blocksData = data["blocks"];
-  for (auto face : blocksData[m_blockName]) {
-    int faceElementsCounter{faceCounter * 20}; // * 4 * 5
+  for (auto it{data["blocks"].begin()}; it != data["blocks"].end(); ++it) {
+    int faceCounter{0};
 
-    m_vertices[(faceElementsCounter) + 03] = (x * width) + 0.0f;
-    m_vertices[(faceElementsCounter) + 04] = (y * height) + 0.0f;
-    m_vertices[(faceElementsCounter) + 08] = (x * width) + width;
-    m_vertices[(faceElementsCounter) + 09] = (y * height) + 0.0f;
-    m_vertices[(faceElementsCounter) + 13] = (x * width) + width;
-    m_vertices[(faceElementsCounter) + 14] = (y * height) + width;
-    m_vertices[(faceElementsCounter) + 18] = (x * width) + 0.0f;
-    m_vertices[(faceElementsCounter) + 19] = (y * height) + width;
+    for (auto &face : it.value()) {
 
-    ++faceCounter;
+      int faceElementsCounter{faceCounter * 20};
+      x = static_cast<float>(face[0]);
+      y = static_cast<float>(face[1]);
+
+      m_vertices[(faceElementsCounter) + 3] = (x * texWidth);
+      m_vertices[(faceElementsCounter) + 4] = (y * texHeight);
+      m_vertices[(faceElementsCounter) + 8] = (x * texWidth) + texWidth;
+      m_vertices[(faceElementsCounter) + 9] = (y * texHeight);
+      m_vertices[(faceElementsCounter) + 13] = (x * texWidth) + texWidth;
+      m_vertices[(faceElementsCounter) + 14] = (y * texHeight) + texHeight;
+      m_vertices[(faceElementsCounter) + 18] = (x * texWidth);
+      m_vertices[(faceElementsCounter) + 19] = (y * texHeight) + texHeight;
+
+      ++faceCounter;
+    }
+
+    float *vertexArrayPointer{new float[120]};
+    std::copy(m_vertices, m_vertices + 119, vertexArrayPointer);
+    blocksVertexList.insert({it.key(), vertexArrayPointer});
+    vertexArrayPointer = nullptr;
   }
 }
