@@ -68,6 +68,7 @@ OBJECTS := \
 	$(OBJDIR)/glad.o \
 	$(OBJDIR)/glm.o \
 	$(OBJDIR)/Shader.o \
+	$(OBJDIR)/Texture2D.o \
 	$(OBJDIR)/main.o \
 
 RESOURCES := \
@@ -134,6 +135,9 @@ $(OBJDIR)/glm.o: ../libs/glm/detail/glm.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/Shader.o: ../src/Shader.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Texture2D.o: ../src/Texture2D.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/main.o: ../src/main.cpp

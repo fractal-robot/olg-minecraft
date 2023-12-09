@@ -101,10 +101,11 @@ obj/debug/main.o: ../src/main.cpp /usr/include/stdc-predef.h \
  /usr/include/c++/13.2.1/cstddef \
  /usr/include/c++/13.2.1/bits/uses_allocator.h \
  /usr/include/c++/13.2.1/bits/uses_allocator_args.h \
- /usr/include/c++/13.2.1/tuple ../src/constants.h ../src/debugger.h \
- ../libs/glad/include/glad/glad.h /usr/include/GLFW/glfw3.h \
- /usr/include/c++/13.2.1/iostream /usr/include/c++/13.2.1/ostream \
- /usr/include/c++/13.2.1/ios /usr/include/c++/13.2.1/exception \
+ /usr/include/c++/13.2.1/tuple ../src/Texture2D.h ../src/constants.h \
+ ../src/debugger.h ../libs/glad/include/glad/glad.h \
+ /usr/include/GLFW/glfw3.h /usr/include/c++/13.2.1/iostream \
+ /usr/include/c++/13.2.1/ostream /usr/include/c++/13.2.1/ios \
+ /usr/include/c++/13.2.1/exception \
  /usr/include/c++/13.2.1/bits/exception_ptr.h \
  /usr/include/c++/13.2.1/bits/cxxabi_init_exception.h \
  /usr/include/c++/13.2.1/typeinfo \
@@ -283,6 +284,7 @@ obj/debug/main.o: ../src/main.cpp /usr/include/stdc-predef.h \
 /usr/include/c++/13.2.1/bits/uses_allocator.h:
 /usr/include/c++/13.2.1/bits/uses_allocator_args.h:
 /usr/include/c++/13.2.1/tuple:
+../src/Texture2D.h:
 ../src/constants.h:
 ../src/debugger.h:
 ../libs/glad/include/glad/glad.h:
