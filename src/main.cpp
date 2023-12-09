@@ -8,6 +8,14 @@
 #include <GLFW/glfw3.h>
 #include <cstdlib>
 #include <iostream>
+#include <math.h>
+
+glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
+glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
+glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
+
+float deltaTime = 0.0f;
+float lastFrame = 0.0f;
 
 void framebufferSizeCallback(GLFWwindow *, int width, int height) {
   glViewport(0, 0, width, height);
@@ -20,6 +28,17 @@ void processInput(GLFWwindow *window) {
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
   else
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+  if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+    cameraPos += constants::cameraSpeed * deltaTime * cameraFront;
+  if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+    cameraPos -= constants::cameraSpeed * deltaTime * cameraFront;
+  if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+    cameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp)) *
+                 constants::cameraSpeed * deltaTime;
+  if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+    cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) *
+                 constants::cameraSpeed * deltaTime;
 }
 
 int main() {
@@ -112,24 +131,27 @@ int main() {
 
   glm::mat4 model{glm::mat4(1.0f)};
 
-  glm::mat4 view = glm::mat4(1.0f);
-  view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+  glm::mat4 view;
 
   glm::mat4 projection{glm::perspective(
       glm::radians(45.0f),
       static_cast<float>(constants::windowWidth) / constants::windowHeight,
       0.1f, 100.0f)};
 
-  shader.setMatrix4("view", view);
   shader.setMatrix4("projection", projection);
+  shader.setMatrix4("model", model);
 
   while (!glfwWindowShouldClose(window)) {
+    float currentFrame = glfwGetTime();
+    deltaTime = currentFrame - lastFrame;
+    lastFrame = currentFrame;
+
     processInput(window);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    model = glm::rotate(model, (float)glfwGetTime() * glm::radians(2000.1f),
-                        glm::vec3(0.5f, 1.0f, 0.0f));
-    shader.setMatrix4("model", model);
+    view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
+
+    shader.setMatrix4("view", view);
 
     glDrawArrays(GL_TRIANGLES, 0, 36);
 

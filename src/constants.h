@@ -7,5 +7,5 @@ namespace constants {
 constexpr int windowHeight{800};
 constexpr int windowWidth{800};
 
-constexpr char resPath[]{"../../res/"};
+constexpr float cameraSpeed{8.f};
 } // namespace constants
