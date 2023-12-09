@@ -67,6 +67,7 @@ endif
 OBJECTS := \
 	$(OBJDIR)/glad.o \
 	$(OBJDIR)/glm.o \
+	$(OBJDIR)/Camera.o \
 	$(OBJDIR)/Shader.o \
 	$(OBJDIR)/Texture2D.o \
 	$(OBJDIR)/main.o \
@@ -132,6 +133,9 @@ $(OBJDIR)/glad.o: ../libs/glad/src/glad.c
 	@echo $(notdir $<)
 	$(SILENT) $(CC) $(ALL_CFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/glm.o: ../libs/glm/detail/glm.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Camera.o: ../src/Camera.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/Shader.o: ../src/Shader.cpp

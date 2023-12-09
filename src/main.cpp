@@ -1,18 +1,18 @@
 #include "../libs/glad/include/glad/glad.h"
 #include "../libs/glm/gtc/matrix_transform.hpp"
 #include "../libs/glm/gtc/type_ptr.hpp"
+#include "Camera.h"
 #include "Shader.h"
 #include "Texture2D.h"
 #include "constants.h"
 #include "debugger.h"
 #include <GLFW/glfw3.h>
+#include <cmath>
 #include <cstdlib>
 #include <iostream>
 #include <math.h>
 
-glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
-glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
-glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
+Camera camera;
 
 float deltaTime = 0.0f;
 float lastFrame = 0.0f;
@@ -20,6 +20,10 @@ float lastFrame = 0.0f;
 void framebufferSizeCallback(GLFWwindow *, int width, int height) {
   glViewport(0, 0, width, height);
 }
+
+void mouseCallback(GLFWwindow *window, double xPos, double yPos) {
+  camera.processMouseMovement(xPos, yPos);
+};
 
 void processInput(GLFWwindow *window) {
   if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
@@ -29,16 +33,7 @@ void processInput(GLFWwindow *window) {
   else
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-  if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-    cameraPos += constants::cameraSpeed * deltaTime * cameraFront;
-  if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-    cameraPos -= constants::cameraSpeed * deltaTime * cameraFront;
-  if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-    cameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp)) *
-                 constants::cameraSpeed * deltaTime;
-  if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-    cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) *
-                 constants::cameraSpeed * deltaTime;
+  camera.processKeyboard(window, deltaTime);
 }
 
 int main() {
@@ -60,7 +55,7 @@ int main() {
 
   glfwMakeContextCurrent(window);
   glfwSetFramebufferSizeCallback(window, framebufferSizeCallback);
-
+  glfwSetCursorPosCallback(window, mouseCallback);
   glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
   if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
@@ -149,7 +144,7 @@ int main() {
     processInput(window);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
+    view = camera.getViewMatrix();
 
     shader.setMatrix4("view", view);
 
