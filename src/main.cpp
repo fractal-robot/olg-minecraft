@@ -94,8 +94,8 @@ int main() {
   glBindBuffer(GL_ARRAY_BUFFER, VBO);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 
-  glBufferData(GL_ARRAY_BUFFER, 120 * sizeof(float),
-               block.blocksVertexList["stone"], GL_STATIC_DRAW);
+  glBufferData(GL_ARRAY_BUFFER, constants::blockVerticesCount * sizeof(float),
+               block.blocksVertexList["grass"], GL_STATIC_DRAW);
   glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(block.indices), block.indices,
                GL_STATIC_DRAW);
 
@@ -128,7 +128,8 @@ int main() {
 
     shader.setMatrix4("view", view);
 
-    glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+    glDrawElements(GL_TRIANGLES, constants::blockIndicesCount, GL_UNSIGNED_INT,
+                   0);
 
     glfwSwapBuffers(window);
     glfwPollEvents();

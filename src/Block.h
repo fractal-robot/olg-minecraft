@@ -1,8 +1,10 @@
 #pragma once
 
+#include "constants.h"
 #include <map>
 #include <string>
 #include <vector>
+
 class Block {
 public:
   std::map<std::string, float *> blocksVertexList;
@@ -10,7 +12,7 @@ public:
   Block(const std::string &jsonPath);
   ~Block();
 
-  unsigned int indices[36] = {
+  unsigned int indices[constants::blockIndicesCount] = {
       // Front
       0, 1, 2, 2, 3, 0,
       // Back
@@ -27,7 +29,7 @@ public:
 private:
   void createBlocksList(const std::string &jsonPath);
 
-  float m_vertices[120] = {
+  float m_vertices[constants::blockVerticesCount] = {
       -0.5f, -0.5f, 0.5f,  .0f, .0f, 0.5f,  -0.5f, 0.5f,  .0f, .0f,
       0.5f,  0.5f,  0.5f,  .0f, .0f, -0.5f, 0.5f,  0.5f,  .0f, .0f,
       0.5f,  -0.5f, -0.5f, .0f, .0f, -0.5f, -0.5f, -0.5f, .0f, .0f,

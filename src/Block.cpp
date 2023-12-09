@@ -1,4 +1,5 @@
 #include "Block.h"
+#include "constants.h"
 #include <algorithm>
 #include <fstream>
 #include <iostream>
@@ -33,7 +34,8 @@ void Block::createBlocksList(const std::string &jsonPath) {
 
     for (auto &face : it.value()) {
 
-      int faceElementsCounter{faceCounter * 20};
+      int faceElementsCounter{faceCounter *
+                              (constants::blockVerticesCount / 6)};
       x = static_cast<float>(face[0]);
       y = static_cast<float>(face[1]);
 
@@ -49,7 +51,8 @@ void Block::createBlocksList(const std::string &jsonPath) {
       ++faceCounter;
     }
 
-    float *vertexArrayPointer{new float[120]};
+    float *vertexArrayPointer{
+        new float[static_cast<std::size_t>(constants::blockVerticesCount)]};
     std::copy(m_vertices, m_vertices + 119, vertexArrayPointer);
     blocksVertexList.insert({it.key(), vertexArrayPointer});
     vertexArrayPointer = nullptr;
