@@ -67,8 +67,10 @@ endif
 OBJECTS := \
 	$(OBJDIR)/glad.o \
 	$(OBJDIR)/glm.o \
+	$(OBJDIR)/Block.o \
 	$(OBJDIR)/BlockGeneration.o \
 	$(OBJDIR)/Camera.o \
+	$(OBJDIR)/Chunck.o \
 	$(OBJDIR)/Shader.o \
 	$(OBJDIR)/Texture2D.o \
 	$(OBJDIR)/main.o \
@@ -136,10 +138,16 @@ $(OBJDIR)/glad.o: ../libs/glad/src/glad.c
 $(OBJDIR)/glm.o: ../libs/glm/detail/glm.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Block.o: ../src/Block.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/BlockGeneration.o: ../src/BlockGeneration.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/Camera.o: ../src/Camera.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Chunck.o: ../src/Chunck.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/Shader.o: ../src/Shader.cpp

@@ -7,7 +7,7 @@
 
 class BlockGeneration {
 public:
-  std::map<std::string, float *> blocksVertexList;
+  std::vector<float *> blocksVertexList;
 
   BlockGeneration(const std::string &jsonPath);
   ~BlockGeneration();

@@ -13,4 +13,5 @@ constexpr float cameraAltitudeSpeed{6.f};
 constexpr int blockVerticesCount{120};
 constexpr int blockIndicesCount{36};
 
+constexpr int chunckSize{16};
 } // namespace constants

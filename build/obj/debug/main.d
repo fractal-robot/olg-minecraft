@@ -333,7 +333,7 @@ obj/debug/main.o: ../src/main.cpp /usr/include/stdc-predef.h \
  ../src/../libs/glm/detail/setup.hpp \
  ../src/../libs/glm/detail/type_half.inl ../src/../libs/glm/integer.hpp \
  ../src/../libs/glm/detail/func_integer.inl /usr/include/GLFW/glfw3.h \
- ../src/Shader.h ../src/Texture2D.h ../src/debugger.h \
+ ../src/Shader.h ../src/Texture2D.h ../src/blockEnum.h ../src/debugger.h \
  ../libs/glad/include/glad/glad.h /usr/include/c++/13.2.1/iostream \
  /usr/include/c++/13.2.1/ostream /usr/include/c++/13.2.1/ios \
  /usr/include/c++/13.2.1/exception \
@@ -768,6 +768,7 @@ obj/debug/main.o: ../src/main.cpp /usr/include/stdc-predef.h \
 /usr/include/GLFW/glfw3.h:
 ../src/Shader.h:
 ../src/Texture2D.h:
+../src/blockEnum.h:
 ../src/debugger.h:
 ../libs/glad/include/glad/glad.h:
 /usr/include/c++/13.2.1/iostream:

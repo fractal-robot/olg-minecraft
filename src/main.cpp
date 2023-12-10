@@ -5,6 +5,7 @@
 #include "Camera.h"
 #include "Shader.h"
 #include "Texture2D.h"
+#include "blockEnum.h"
 #include "constants.h"
 #include "debugger.h"
 #include <GLFW/glfw3.h>
@@ -45,6 +46,7 @@ int main() {
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 4);
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
   glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, true);
+  glfwWindowHint(GLFW_SAMPLES, 4);
 
   GLFWwindow *window = glfwCreateWindow(
       constants::windowWidth, constants::windowHeight, "window", NULL, NULL);
@@ -66,7 +68,10 @@ int main() {
 
   glViewport(0, 0, constants::windowWidth, constants::windowHeight);
   glClearColor(1, 1, 1, 1);
+
   glEnable(GL_DEPTH_TEST);
+  glEnable(GL_CULL_FACE);
+  glEnable(GL_MULTISAMPLE);
 
   debugger::initDebugger();
 
@@ -89,8 +94,11 @@ int main() {
   glBindBuffer(GL_ARRAY_BUFFER, VBO);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 
-  glBufferData(GL_ARRAY_BUFFER, constants::blockVerticesCount * sizeof(float),
-               blockVertex.blocksVertexList["piston"], GL_STATIC_DRAW);
+  glBufferData(
+      GL_ARRAY_BUFFER, constants::blockVerticesCount * sizeof(float),
+      blockVertex
+          .blocksVertexList[static_cast<std::size_t>(blocksEnum::sandstone)],
+      GL_STATIC_DRAW);
   glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(blockVertex.indices),
                blockVertex.indices, GL_STATIC_DRAW);
 
@@ -120,9 +128,9 @@ int main() {
     view = camera.getViewMatrix();
     shader.setMatrix4("view", view);
 
-    for (std::size_t i{0}; i < 20; ++i) {
-      for (std::size_t j{0}; j < 20; ++j) {
-        for (std::size_t k{0}; k < 20; ++k) {
+    for (std::size_t i{0}; i < 1; ++i) {
+      for (std::size_t j{0}; j < 1; ++j) {
+        for (std::size_t k{0}; k < 1; ++k) {
           glm::mat4 model{glm::mat4(1.0f)};
           glm::vec3 pos(i, j, k);
           model = glm::translate(model, pos);

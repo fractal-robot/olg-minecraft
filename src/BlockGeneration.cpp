@@ -1,19 +1,22 @@
 #include "BlockGeneration.h"
+#include "blockEnum.h"
 #include "constants.h"
 #include <algorithm>
 #include <cassert>
+#include <cstddef>
 #include <fstream>
 #include <iostream>
 #include <nlohmann/json.hpp>
 #include <utility>
 
 BlockGeneration::BlockGeneration(const std::string &jsonPath) {
+  blocksVertexList.reserve(static_cast<std::size_t>(blocksEnum::total));
   createBlocksList(jsonPath);
 };
 
 BlockGeneration::~BlockGeneration() {
-  for (const auto &pair : blocksVertexList) {
-    delete[] pair.second;
+  for (const auto &ptr : blocksVertexList) {
+    delete[] ptr;
   }
 }
 
@@ -41,11 +44,6 @@ void BlockGeneration::createBlocksList(const std::string &jsonPath) {
       x = static_cast<float>(face[0]);
       y = static_cast<float>(face[1]);
 
-      if (it.key() == "piston")
-        std::cout << faceCounter << ": " << x * texWidth << ' ' << y * texWidth
-                  << '\n'
-                  << texWidth << '\n';
-
       m_vertices[(faceElementsCounter) + 3] = (x * texWidth);
       m_vertices[(faceElementsCounter) + 4] = (y * texHeight);
       m_vertices[(faceElementsCounter) + 8] = (x * texWidth) + texWidth;
@@ -62,18 +60,7 @@ void BlockGeneration::createBlocksList(const std::string &jsonPath) {
         new float[static_cast<std::size_t>(constants::blockVerticesCount)]};
     std::copy(m_vertices, m_vertices + constants::blockVerticesCount,
               vertexArrayPointer);
-    blocksVertexList.insert({it.key(), vertexArrayPointer});
+    blocksVertexList.push_back(vertexArrayPointer);
     vertexArrayPointer = nullptr;
-
-    int counter{1};
-    if (it.key() == "piston") {
-      for (auto &e : m_vertices) {
-        std::cout << e << ' ';
-        if (counter % 5 == 0) {
-          std::cout << '\n';
-        }
-        ++counter;
-      }
-    }
   }
 }
