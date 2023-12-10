@@ -1,7 +1,7 @@
 #include "../libs/glad/include/glad/glad.h"
 #include "../libs/glm/gtc/matrix_transform.hpp"
 #include "../libs/glm/gtc/type_ptr.hpp"
-#include "Block.h"
+#include "BlockGeneration.h"
 #include "Camera.h"
 #include "Shader.h"
 #include "Texture2D.h"
@@ -9,12 +9,13 @@
 #include "debugger.h"
 #include <GLFW/glfw3.h>
 #include <cmath>
+#include <cstddef>
 #include <cstdlib>
 #include <iostream>
 #include <math.h>
 
 Camera camera;
-Block block("../../res/textures/block_info.json");
+BlockGeneration blockVertex("../../res/textures/block_info.json");
 
 float deltaTime = 0.0f;
 float lastFrame = 0.0f;
@@ -39,13 +40,7 @@ void processInput(GLFWwindow *window) {
 }
 
 int main() {
-
-  for (auto e : block.blocksVertexList) {
-    std::cout << e.first << ' ' << e.second << '\n';
-  }
-
   glfwInit();
-
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 4);
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -95,9 +90,9 @@ int main() {
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 
   glBufferData(GL_ARRAY_BUFFER, constants::blockVerticesCount * sizeof(float),
-               block.blocksVertexList["grass"], GL_STATIC_DRAW);
-  glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(block.indices), block.indices,
-               GL_STATIC_DRAW);
+               blockVertex.blocksVertexList["piston"], GL_STATIC_DRAW);
+  glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(blockVertex.indices),
+               blockVertex.indices, GL_STATIC_DRAW);
 
   glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), nullptr);
   glEnableVertexAttribArray(0);
@@ -106,7 +101,6 @@ int main() {
                         (void *)(3 * sizeof(float)));
   glEnableVertexAttribArray(1);
 
-  glm::mat4 model{glm::mat4(1.0f)};
   glm::mat4 view;
   glm::mat4 projection{glm::perspective(
       glm::radians(45.0f),
@@ -114,7 +108,6 @@ int main() {
       0.1f, 100.0f)};
 
   shader.setMatrix4("projection", projection);
-  shader.setMatrix4("model", model);
 
   while (!glfwWindowShouldClose(window)) {
     float currentFrame = glfwGetTime();
@@ -125,11 +118,21 @@ int main() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     view = camera.getViewMatrix();
-
     shader.setMatrix4("view", view);
 
-    glDrawElements(GL_TRIANGLES, constants::blockIndicesCount, GL_UNSIGNED_INT,
-                   0);
+    for (std::size_t i{0}; i < 20; ++i) {
+      for (std::size_t j{0}; j < 20; ++j) {
+        for (std::size_t k{0}; k < 20; ++k) {
+          glm::mat4 model{glm::mat4(1.0f)};
+          glm::vec3 pos(i, j, k);
+          model = glm::translate(model, pos);
+          shader.setMatrix4("model", model);
+
+          glDrawElements(GL_TRIANGLES, constants::blockIndicesCount,
+                         GL_UNSIGNED_INT, 0);
+        }
+      }
+    }
 
     glfwSwapBuffers(window);
     glfwPollEvents();

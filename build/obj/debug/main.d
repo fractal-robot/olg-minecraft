@@ -256,7 +256,8 @@ obj/debug/main.o: ../src/main.cpp /usr/include/stdc-predef.h \
  ../src/../libs/glm/gtc/../gtc/../ext/vector_uint1_sized.hpp \
  /usr/include/c++/13.2.1/cstring /usr/include/string.h \
  /usr/include/strings.h ../src/../libs/glm/gtc/type_ptr.inl \
- ../src/Block.h ../src/constants.h /usr/include/c++/13.2.1/string_view \
+ ../src/BlockGeneration.h ../src/constants.h \
+ /usr/include/c++/13.2.1/string_view \
  /usr/include/c++/13.2.1/bits/char_traits.h \
  /usr/include/c++/13.2.1/bits/postypes.h /usr/include/c++/13.2.1/cwchar \
  /usr/include/wchar.h \
@@ -660,7 +661,7 @@ obj/debug/main.o: ../src/main.cpp /usr/include/stdc-predef.h \
 /usr/include/string.h:
 /usr/include/strings.h:
 ../src/../libs/glm/gtc/type_ptr.inl:
-../src/Block.h:
+../src/BlockGeneration.h:
 ../src/constants.h:
 /usr/include/c++/13.2.1/string_view:
 /usr/include/c++/13.2.1/bits/char_traits.h:

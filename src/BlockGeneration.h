@@ -5,12 +5,12 @@
 #include <string>
 #include <vector>
 
-class Block {
+class BlockGeneration {
 public:
   std::map<std::string, float *> blocksVertexList;
 
-  Block(const std::string &jsonPath);
-  ~Block();
+  BlockGeneration(const std::string &jsonPath);
+  ~BlockGeneration();
 
   unsigned int indices[constants::blockIndicesCount] = {
       // Front

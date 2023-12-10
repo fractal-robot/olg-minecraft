@@ -1,25 +1,28 @@
-#include "Block.h"
+#include "BlockGeneration.h"
 #include "constants.h"
 #include <algorithm>
+#include <cassert>
 #include <fstream>
 #include <iostream>
 #include <nlohmann/json.hpp>
 #include <utility>
 
-Block::Block(const std::string &jsonPath) { createBlocksList(jsonPath); };
+BlockGeneration::BlockGeneration(const std::string &jsonPath) {
+  createBlocksList(jsonPath);
+};
 
-Block::~Block() {
+BlockGeneration::~BlockGeneration() {
   for (const auto &pair : blocksVertexList) {
     delete[] pair.second;
   }
 }
 
-void Block::createBlocksList(const std::string &jsonPath) {
+void BlockGeneration::createBlocksList(const std::string &jsonPath) {
   using json = nlohmann::json;
 
   std::ifstream file(jsonPath);
   if (!file.is_open())
-    std::cerr << "Block: unable to open json file.\n";
+    std::cerr << "BlockGeneration: unable to open json file.\n";
 
   json data;
   file >> data;
@@ -33,11 +36,15 @@ void Block::createBlocksList(const std::string &jsonPath) {
     int faceCounter{0};
 
     for (auto &face : it.value()) {
-
       int faceElementsCounter{faceCounter *
                               (constants::blockVerticesCount / 6)};
       x = static_cast<float>(face[0]);
       y = static_cast<float>(face[1]);
+
+      if (it.key() == "piston")
+        std::cout << faceCounter << ": " << x * texWidth << ' ' << y * texWidth
+                  << '\n'
+                  << texWidth << '\n';
 
       m_vertices[(faceElementsCounter) + 3] = (x * texWidth);
       m_vertices[(faceElementsCounter) + 4] = (y * texHeight);
@@ -53,8 +60,20 @@ void Block::createBlocksList(const std::string &jsonPath) {
 
     float *vertexArrayPointer{
         new float[static_cast<std::size_t>(constants::blockVerticesCount)]};
-    std::copy(m_vertices, m_vertices + 119, vertexArrayPointer);
+    std::copy(m_vertices, m_vertices + constants::blockVerticesCount,
+              vertexArrayPointer);
     blocksVertexList.insert({it.key(), vertexArrayPointer});
     vertexArrayPointer = nullptr;
+
+    int counter{1};
+    if (it.key() == "piston") {
+      for (auto &e : m_vertices) {
+        std::cout << e << ' ';
+        if (counter % 5 == 0) {
+          std::cout << '\n';
+        }
+        ++counter;
+      }
+    }
   }
 }
