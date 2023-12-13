@@ -14,4 +14,6 @@ inline constexpr int blockVerticesCount{120};
 inline constexpr int blockIndicesCount{36};
 
 inline constexpr int chunckSize{16};
+
+inline constexpr int elementOffset{5};
 } // namespace constants

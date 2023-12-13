@@ -71,6 +71,7 @@ OBJECTS := \
 	$(OBJDIR)/BlockGeneration.o \
 	$(OBJDIR)/Camera.o \
 	$(OBJDIR)/Chunck.o \
+	$(OBJDIR)/Mesher.o \
 	$(OBJDIR)/Shader.o \
 	$(OBJDIR)/Texture2D.o \
 	$(OBJDIR)/main.o \
@@ -148,6 +149,9 @@ $(OBJDIR)/Camera.o: ../src/Camera.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/Chunck.o: ../src/Chunck.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Mesher.o: ../src/Mesher.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/Shader.o: ../src/Shader.cpp
