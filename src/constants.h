@@ -2,6 +2,7 @@
 
 #include <cstddef>
 #include <string_view>
+
 namespace constants {
 inline constexpr int windowHeight{800};
 inline constexpr int windowWidth{800};
