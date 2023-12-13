@@ -3,11 +3,11 @@
 #include "constants.h"
 #include <algorithm>
 #include <cstddef>
+#include <iostream>
 
 BlockGeneration blockVertex("../../res/textures/block_info.json");
 
 void Mesher::mesh(ChunckArray &chunck, unsigned int (&indices)[1000],
-
                   float (&vertices)[10000]) {
 
   std::array<unsigned int, 10000> templateIndices = {// Front
@@ -76,6 +76,8 @@ void Mesher::mesh(ChunckArray &chunck, unsigned int (&indices)[1000],
 
             ++verticesCounter;
           }
+
+          std::cout << verticesCounter << ' ';
         }
 
         // set block indices

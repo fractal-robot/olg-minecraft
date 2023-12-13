@@ -7,6 +7,7 @@
 #include <algorithm>
 #include <array>
 #include <cstddef>
+#include <iostream>
 #include <iterator>
 
 Chunck::Chunck() {
@@ -44,3 +45,17 @@ Chunck::~Chunck() {
 void Chunck::update() { Mesher::mesh(m_chunck, m_indices, m_vertices); }
 
 void Chunck::render() const { glBindVertexArray(m_VAO); }
+
+void Chunck::print() const {
+  for (auto v : m_indices) {
+    if (v != 0)
+      std::cout << v << ' ';
+  }
+
+  std::cout << '\n' << '\n';
+
+  for (auto v : m_vertices) {
+    if (v != 0)
+      std::cout << v << ' ';
+  }
+}
