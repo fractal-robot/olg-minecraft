@@ -3,15 +3,15 @@
 #include <cstddef>
 #include <string_view>
 namespace constants {
-constexpr int windowHeight{800};
-constexpr int windowWidth{800};
+inline constexpr int windowHeight{800};
+inline constexpr int windowWidth{800};
 
-constexpr float cameraSpeed{8.f};
-constexpr float cameraSensivity{.04f};
-constexpr float cameraAltitudeSpeed{6.f};
+inline constexpr float cameraSpeed{8.f};
+inline constexpr float cameraSensivity{.04f};
+inline constexpr float cameraAltitudeSpeed{6.f};
 
-constexpr int blockVerticesCount{120};
-constexpr int blockIndicesCount{36};
+inline constexpr int blockVerticesCount{120};
+inline constexpr int blockIndicesCount{36};
 
-constexpr int chunckSize{16};
+inline constexpr int chunckSize{16};
 } // namespace constants

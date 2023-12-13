@@ -273,8 +273,9 @@ obj/debug/main.o: ../src/main.cpp /usr/include/stdc-predef.h \
  /usr/include/c++/13.2.1/bits/memoryfwd.h \
  /usr/include/c++/13.2.1/bits/ostream_insert.h \
  /usr/include/c++/13.2.1/bits/cxxabi_forced.h \
- /usr/include/c++/13.2.1/bits/string_view.tcc /usr/include/c++/13.2.1/map \
- /usr/include/c++/13.2.1/bits/stl_tree.h \
+ /usr/include/c++/13.2.1/bits/string_view.tcc \
+ /usr/include/c++/13.2.1/array /usr/include/c++/13.2.1/compare \
+ /usr/include/c++/13.2.1/map /usr/include/c++/13.2.1/bits/stl_tree.h \
  /usr/include/c++/13.2.1/bits/allocator.h \
  /usr/include/c++/13.2.1/x86_64-pc-linux-gnu/bits/c++allocator.h \
  /usr/include/c++/13.2.1/bits/new_allocator.h /usr/include/c++/13.2.1/new \
@@ -684,6 +685,8 @@ obj/debug/main.o: ../src/main.cpp /usr/include/stdc-predef.h \
 /usr/include/c++/13.2.1/bits/ostream_insert.h:
 /usr/include/c++/13.2.1/bits/cxxabi_forced.h:
 /usr/include/c++/13.2.1/bits/string_view.tcc:
+/usr/include/c++/13.2.1/array:
+/usr/include/c++/13.2.1/compare:
 /usr/include/c++/13.2.1/map:
 /usr/include/c++/13.2.1/bits/stl_tree.h:
 /usr/include/c++/13.2.1/bits/allocator.h:

@@ -66,6 +66,8 @@ int main() {
     return EXIT_FAILURE;
   }
 
+  blockVertex.print();
+
   glViewport(0, 0, constants::windowWidth, constants::windowHeight);
   glClearColor(1, 1, 1, 1);
 

@@ -2,6 +2,7 @@
 #include "blockEnum.h"
 #include "constants.h"
 #include <algorithm>
+#include <array>
 #include <cassert>
 #include <cstddef>
 #include <fstream>
@@ -9,8 +10,27 @@
 #include <nlohmann/json.hpp>
 #include <utility>
 
+void BlockGeneration::print() const {
+
+  for (std::size_t i{0}; i < constants::blockVerticesCount; i += 5) {
+    std::cout << blocksVertexList[0][i + 3] << ' ';
+    std::cout << blocksVertexList[0][i + 4] << ' ';
+  }
+
+  std::cout << '\n' << '\n';
+
+  for (std::size_t j{0}; j < 6; ++j) {
+    for (std::size_t h{0}; h < 4; ++h) {
+      std::cout << blocksVertices[0][j][h].x << ' ' << blocksVertices[0][j][h].y
+                << ' ';
+    }
+  }
+}
+
 BlockGeneration::BlockGeneration(const std::string &jsonPath) {
   blocksVertexList.reserve(static_cast<std::size_t>(blocksEnum::total));
+
+  blocksVertices.reserve(static_cast<std::size_t>(blocksEnum::total));
   createBlocksList(jsonPath);
 };
 
@@ -35,6 +55,8 @@ void BlockGeneration::createBlocksList(const std::string &jsonPath) {
 
   int x, y;
 
+  std::array<std::array<glm::vec2, 4>, 6> blockVertices;
+
   for (auto it{data["blocks"].begin()}; it != data["blocks"].end(); ++it) {
     int faceCounter{0};
 
@@ -53,8 +75,16 @@ void BlockGeneration::createBlocksList(const std::string &jsonPath) {
       m_vertices[(faceElementsCounter) + 18] = (x * texWidth);
       m_vertices[(faceElementsCounter) + 19] = (y * texHeight) + texHeight;
 
+      blockVertices[faceCounter][0] = {x * texWidth, y * texHeight};
+      blockVertices[faceCounter][1] = {x * texWidth + texWidth, y * texHeight};
+      blockVertices[faceCounter][2] = {x * texWidth + texWidth,
+                                       y * texHeight + texHeight};
+      blockVertices[faceCounter][3] = {x * texWidth, y * texHeight + texHeight};
+
       ++faceCounter;
     }
+
+    blocksVertices.push_back(blockVertices);
 
     float *vertexArrayPointer{
         new float[static_cast<std::size_t>(constants::blockVerticesCount)]};
