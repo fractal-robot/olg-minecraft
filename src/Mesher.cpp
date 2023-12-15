@@ -47,6 +47,8 @@ void Mesher::mesh(ChunckArray &chunck, std::vector<float> &vertices,
     for (std::size_t y{0}; y < constants::chunckSize; ++y) {
       for (std::size_t z{0}; z < constants::chunckSize; ++z) {
 
+        std::cout << x << ' ' << y << ' ' << z << '\n';
+
         if (!chunck[x][y][z].isActive()) {
           continue;
         }
@@ -56,11 +58,11 @@ void Mesher::mesh(ChunckArray &chunck, std::vector<float> &vertices,
           for (std::size_t vertexCounter{0}; vertexCounter < 4;
                ++vertexCounter) {
             vertices.push_back(
-                templateVertices[vertexCounter * 3 + faceCounter * 12] * x);
+                templateVertices[vertexCounter * 3 + faceCounter * 12] + x);
             vertices.push_back(
-                templateVertices[vertexCounter * 3 + faceCounter * 12 + 1] * y);
+                templateVertices[vertexCounter * 3 + faceCounter * 12 + 1] + y);
             vertices.push_back(
-                templateVertices[vertexCounter * 3 + faceCounter * 12 + 2] * z);
+                templateVertices[vertexCounter * 3 + faceCounter * 12 + 2] + z);
 
             std::size_t blockType =
                 static_cast<std::size_t>(chunck[x][y][z].getType());
@@ -89,12 +91,9 @@ void Mesher::mesh(ChunckArray &chunck, std::vector<float> &vertices,
     }
   }
 
-  // assert(std::size(vertices) <= constants::chunckSize * constants::chunckSize
-  // *
-  //                                   constants::chunckSize * 6 * 4 * 5);
-  // assert(std::size(indices) <= constants::chunckSize * constants::chunckSize
-  // *
-  //                                   constants::chunckSize * 36);
-
-  // std::cout << std::size(vertices) << " indices: " << std::size(indices);
+  /*
+    assert(std::size(vertices) <= constants::chunckSize * constants::chunckSize
+    * constants::chunckSize * 6 * 4 * 5); assert(std::size(indices) <=
+    constants::chunckSize * constants::chunckSize * constants::chunckSize * 36);
+  */
 }
