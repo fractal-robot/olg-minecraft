@@ -15,6 +15,8 @@ BlockGeneration blockVertex("../../res/textures/block_info.json");
 void Mesher::mesh(ChunckArray &chunck, std::vector<float> &vertices,
                   std::vector<unsigned int> &indices) {
 
+  blockVertex.print();
+
   std::array<unsigned int, 36> templateIndices = {// Front
                                                   0, 1, 2, 2, 3, 0,
                                                   // Back
@@ -53,9 +55,12 @@ void Mesher::mesh(ChunckArray &chunck, std::vector<float> &vertices,
         for (std::size_t faceCounter{0}; faceCounter < 6; ++faceCounter) {
           for (std::size_t vertexCounter{0}; vertexCounter < 4;
                ++vertexCounter) {
-            vertices.push_back(templateVertices[faceCounter * 3]);
-            vertices.push_back(templateVertices[faceCounter * 3 + 1]);
-            vertices.push_back(templateVertices[faceCounter * 3 + 2]);
+            vertices.push_back(
+                templateVertices[vertexCounter * 3 + faceCounter * 12] * x);
+            vertices.push_back(
+                templateVertices[vertexCounter * 3 + faceCounter * 12 + 1] * y);
+            vertices.push_back(
+                templateVertices[vertexCounter * 3 + faceCounter * 12 + 2] * z);
 
             std::size_t blockType =
                 static_cast<std::size_t>(chunck[x][y][z].getType());
@@ -72,20 +77,24 @@ void Mesher::mesh(ChunckArray &chunck, std::vector<float> &vertices,
           }
         }
 
+        indices.insert(indices.end(), templateIndices.begin(),
+                       templateIndices.end());
+
         // set block indices
         std::for_each(templateIndices.begin(), templateIndices.end(),
                       [](unsigned int &n) { n += 6 * 4; });
-
-        indices.insert(indices.end(), templateIndices.begin(),
-                       templateIndices.end());
 
         ++indicesCounter;
       }
     }
   }
 
-  assert(std::size(vertices) <= constants::chunckSize * constants::chunckSize *
-                                    constants::chunckSize * 6 * 4 * 5);
-  assert(std::size(indices) <= constants::chunckSize * constants::chunckSize *
-                                   constants::chunckSize * 36);
+  // assert(std::size(vertices) <= constants::chunckSize * constants::chunckSize
+  // *
+  //                                   constants::chunckSize * 6 * 4 * 5);
+  // assert(std::size(indices) <= constants::chunckSize * constants::chunckSize
+  // *
+  //                                   constants::chunckSize * 36);
+
+  // std::cout << std::size(vertices) << " indices: " << std::size(indices);
 }

@@ -7,10 +7,14 @@
 #include <algorithm>
 #include <array>
 #include <cstddef>
+#include <iomanip>
 #include <iostream>
 #include <iterator>
 
 Chunck::Chunck() {
+
+  update();
+
   glGenVertexArrays(1, &m_VAO);
   glGenBuffers(1, &m_VBO);
   glGenBuffers(1, &m_EBO);
@@ -35,6 +39,8 @@ Chunck::Chunck() {
   glBindVertexArray(0);
   glBindBuffer(GL_ARRAY_BUFFER, 0);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+  print();
 }
 
 Chunck::~Chunck() {
@@ -47,22 +53,27 @@ void Chunck::update() { Mesher::mesh(m_chunck, m_vertices, m_indices); }
 
 void Chunck::render() const {
   glBindVertexArray(m_VAO);
-  glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
-  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_EBO);
-
-  glDrawElements(GL_TRIANGLES, 1, GL_UNSIGNED_INT, 0);
+  glDrawElements(GL_TRIANGLES, std::size(m_indices), GL_UNSIGNED_INT, 0);
 }
 
 void Chunck::print() const {
+  int counter{0};
+
   for (auto v : m_indices) {
-    if (v != 0)
-      std::cout << v << ' ';
+    if (counter % 6 == 0 && counter != 0)
+      std::cout << "    " << counter / 5 << '\n';
+    std::cout << std::setw(7) << v << ' ';
+    ++counter;
   }
 
   std::cout << '\n' << '\n';
+  counter = 0;
 
   for (auto v : m_vertices) {
-    if (v != 0)
-      std::cout << v << ' ';
+    if (counter % 5 == 0 && counter != 0)
+      std::cout << "    " << counter / 5 << '\n';
+
+    std::cout << std::setw(7) << v << ' ';
+    ++counter;
   }
 }

@@ -12,19 +12,13 @@
 
 void BlockGeneration::print() const {
 
-  for (std::size_t i{0}; i < constants::blockVerticesCount; i += 5) {
-    std::cout << blocksVertexList[0][i + 3] << ' ';
-    std::cout << blocksVertexList[0][i + 4] << ' ';
+  for (std::size_t i{0}; i < constants::blockVerticesCount; ++i) {
+    std::cout
+        << blocksVertexList[static_cast<std::size_t>(blocksEnum::grass)][i]
+        << ' ';
   }
 
   std::cout << '\n' << '\n';
-
-  for (std::size_t j{0}; j < 6; ++j) {
-    for (std::size_t h{0}; h < 4; ++h) {
-      std::cout << blocksVertices[0][j][h].x << ' ' << blocksVertices[0][j][h].y
-                << ' ';
-    }
-  }
 }
 
 BlockGeneration::BlockGeneration(const std::string &jsonPath) {
