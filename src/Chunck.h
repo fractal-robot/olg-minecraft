@@ -3,6 +3,7 @@
 #include "Block.h"
 #include "constants.h"
 #include <array>
+#include <vector>
 
 class Chunck {
 public:
@@ -19,8 +20,8 @@ private:
              constants::chunckSize>
       m_chunck;
 
-  unsigned int m_indices[1000]{};
-  float m_vertices[10000]{};
+  std::vector<unsigned int> m_indices{};
+  std::vector<float> m_vertices{};
 
   unsigned int m_VAO, m_VBO, m_EBO;
 };

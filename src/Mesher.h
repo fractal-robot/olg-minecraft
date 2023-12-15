@@ -14,6 +14,6 @@ using BlocksTexVertices = std::vector<std::array<std::array<glm::vec2, 4>, 6>>;
 
 class Mesher {
 public:
-  static void mesh(ChunckArray &chunck, unsigned int (&indices)[1000],
-                   float (&vertices)[10000]);
+  static void mesh(ChunckArray &chunck, std::vector<float> &vertices,
+                   std::vector<unsigned int> &indices);
 };
