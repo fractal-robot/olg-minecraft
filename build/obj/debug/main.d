@@ -273,49 +273,41 @@ obj/debug/main.o: ../src/main.cpp /usr/include/stdc-predef.h \
  ../src/../libs/glm/detail/setup.hpp \
  ../src/../libs/glm/detail/type_half.inl ../src/../libs/glm/integer.hpp \
  ../src/../libs/glm/detail/func_integer.inl /usr/include/GLFW/glfw3.h \
- ../src/Chunck.h ../src/Block.h ../src/blockEnum.h ../src/constants.h \
- /usr/include/c++/13.2.1/string_view \
+ ../src/Chunck.h ../src/Block.h ../src/blockEnum.h \
+ /usr/include/c++/13.2.1/bitset /usr/include/c++/13.2.1/string \
+ /usr/include/c++/13.2.1/bits/stringfwd.h \
+ /usr/include/c++/13.2.1/bits/memoryfwd.h \
  /usr/include/c++/13.2.1/bits/char_traits.h \
  /usr/include/c++/13.2.1/bits/postypes.h /usr/include/c++/13.2.1/cwchar \
  /usr/include/wchar.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/stdarg.h \
  /usr/include/bits/types/wint_t.h /usr/include/bits/types/mbstate_t.h \
  /usr/include/bits/types/__mbstate_t.h /usr/include/bits/types/__FILE.h \
- /usr/include/bits/types/FILE.h \
- /usr/include/c++/13.2.1/bits/functional_hash.h \
- /usr/include/c++/13.2.1/bits/hash_bytes.h \
- /usr/include/c++/13.2.1/bits/range_access.h \
- /usr/include/c++/13.2.1/initializer_list /usr/include/c++/13.2.1/iosfwd \
- /usr/include/c++/13.2.1/bits/stringfwd.h \
- /usr/include/c++/13.2.1/bits/memoryfwd.h \
- /usr/include/c++/13.2.1/bits/ostream_insert.h \
- /usr/include/c++/13.2.1/bits/cxxabi_forced.h \
- /usr/include/c++/13.2.1/bits/string_view.tcc \
- /usr/include/c++/13.2.1/array /usr/include/c++/13.2.1/compare \
- /usr/include/c++/13.2.1/vector /usr/include/c++/13.2.1/bits/allocator.h \
+ /usr/include/bits/types/FILE.h /usr/include/c++/13.2.1/bits/allocator.h \
  /usr/include/c++/13.2.1/x86_64-pc-linux-gnu/bits/c++allocator.h \
  /usr/include/c++/13.2.1/bits/new_allocator.h /usr/include/c++/13.2.1/new \
  /usr/include/c++/13.2.1/bits/exception.h \
- /usr/include/c++/13.2.1/bits/stl_construct.h \
- /usr/include/c++/13.2.1/bits/stl_uninitialized.h \
- /usr/include/c++/13.2.1/ext/alloc_traits.h \
- /usr/include/c++/13.2.1/bits/alloc_traits.h \
- /usr/include/c++/13.2.1/bits/stl_vector.h \
- /usr/include/c++/13.2.1/bits/stl_bvector.h \
- /usr/include/c++/13.2.1/bits/refwrap.h \
- /usr/include/c++/13.2.1/bits/invoke.h \
- /usr/include/c++/13.2.1/bits/stl_function.h \
- /usr/include/c++/13.2.1/backward/binders.h \
- /usr/include/c++/13.2.1/bits/vector.tcc \
- /usr/include/c++/13.2.1/bits/memory_resource.h \
- /usr/include/c++/13.2.1/bits/uses_allocator.h \
- /usr/include/c++/13.2.1/bits/uses_allocator_args.h \
- /usr/include/c++/13.2.1/tuple ../src/Shader.h \
- /usr/include/c++/13.2.1/string /usr/include/c++/13.2.1/bits/localefwd.h \
+ /usr/include/c++/13.2.1/bits/localefwd.h \
  /usr/include/c++/13.2.1/x86_64-pc-linux-gnu/bits/c++locale.h \
  /usr/include/c++/13.2.1/clocale /usr/include/locale.h \
- /usr/include/bits/locale.h /usr/include/c++/13.2.1/cctype \
- /usr/include/ctype.h /usr/include/c++/13.2.1/bits/basic_string.h \
+ /usr/include/bits/locale.h /usr/include/c++/13.2.1/iosfwd \
+ /usr/include/c++/13.2.1/cctype /usr/include/ctype.h \
+ /usr/include/c++/13.2.1/bits/ostream_insert.h \
+ /usr/include/c++/13.2.1/bits/cxxabi_forced.h \
+ /usr/include/c++/13.2.1/bits/stl_function.h \
+ /usr/include/c++/13.2.1/backward/binders.h \
+ /usr/include/c++/13.2.1/bits/refwrap.h \
+ /usr/include/c++/13.2.1/bits/invoke.h \
+ /usr/include/c++/13.2.1/bits/range_access.h \
+ /usr/include/c++/13.2.1/initializer_list \
+ /usr/include/c++/13.2.1/bits/basic_string.h \
+ /usr/include/c++/13.2.1/ext/alloc_traits.h \
+ /usr/include/c++/13.2.1/bits/alloc_traits.h \
+ /usr/include/c++/13.2.1/bits/stl_construct.h \
+ /usr/include/c++/13.2.1/string_view \
+ /usr/include/c++/13.2.1/bits/functional_hash.h \
+ /usr/include/c++/13.2.1/bits/hash_bytes.h \
+ /usr/include/c++/13.2.1/bits/string_view.tcc \
  /usr/include/c++/13.2.1/ext/string_conversions.h \
  /usr/include/c++/13.2.1/cstdlib /usr/include/c++/13.2.1/cstdio \
  /usr/include/stdio.h /usr/include/bits/types/__fpos_t.h \
@@ -328,8 +320,18 @@ obj/debug/main.o: ../src/main.cpp /usr/include/stdc-predef.h \
  /usr/include/asm-generic/errno.h /usr/include/asm-generic/errno-base.h \
  /usr/include/bits/types/error_t.h \
  /usr/include/c++/13.2.1/bits/charconv.h \
- /usr/include/c++/13.2.1/bits/basic_string.tcc ../src/Texture2D.h \
- ../src/debugger.h ../libs/glad/include/glad/glad.h \
+ /usr/include/c++/13.2.1/bits/basic_string.tcc \
+ /usr/include/c++/13.2.1/bits/memory_resource.h \
+ /usr/include/c++/13.2.1/bits/uses_allocator.h \
+ /usr/include/c++/13.2.1/bits/uses_allocator_args.h \
+ /usr/include/c++/13.2.1/tuple ../src/constants.h \
+ /usr/include/c++/13.2.1/array /usr/include/c++/13.2.1/compare \
+ /usr/include/c++/13.2.1/vector \
+ /usr/include/c++/13.2.1/bits/stl_uninitialized.h \
+ /usr/include/c++/13.2.1/bits/stl_vector.h \
+ /usr/include/c++/13.2.1/bits/stl_bvector.h \
+ /usr/include/c++/13.2.1/bits/vector.tcc ../src/Shader.h \
+ ../src/Texture2D.h ../src/debugger.h ../libs/glad/include/glad/glad.h \
  /usr/include/c++/13.2.1/iostream /usr/include/c++/13.2.1/ostream \
  /usr/include/c++/13.2.1/ios /usr/include/c++/13.2.1/exception \
  /usr/include/c++/13.2.1/bits/exception_ptr.h \
@@ -685,8 +687,10 @@ obj/debug/main.o: ../src/main.cpp /usr/include/stdc-predef.h \
 ../src/Chunck.h:
 ../src/Block.h:
 ../src/blockEnum.h:
-../src/constants.h:
-/usr/include/c++/13.2.1/string_view:
+/usr/include/c++/13.2.1/bitset:
+/usr/include/c++/13.2.1/string:
+/usr/include/c++/13.2.1/bits/stringfwd.h:
+/usr/include/c++/13.2.1/bits/memoryfwd.h:
 /usr/include/c++/13.2.1/bits/char_traits.h:
 /usr/include/c++/13.2.1/bits/postypes.h:
 /usr/include/c++/13.2.1/cwchar:
@@ -697,49 +701,35 @@ obj/debug/main.o: ../src/main.cpp /usr/include/stdc-predef.h \
 /usr/include/bits/types/__mbstate_t.h:
 /usr/include/bits/types/__FILE.h:
 /usr/include/bits/types/FILE.h:
-/usr/include/c++/13.2.1/bits/functional_hash.h:
-/usr/include/c++/13.2.1/bits/hash_bytes.h:
-/usr/include/c++/13.2.1/bits/range_access.h:
-/usr/include/c++/13.2.1/initializer_list:
-/usr/include/c++/13.2.1/iosfwd:
-/usr/include/c++/13.2.1/bits/stringfwd.h:
-/usr/include/c++/13.2.1/bits/memoryfwd.h:
-/usr/include/c++/13.2.1/bits/ostream_insert.h:
-/usr/include/c++/13.2.1/bits/cxxabi_forced.h:
-/usr/include/c++/13.2.1/bits/string_view.tcc:
-/usr/include/c++/13.2.1/array:
-/usr/include/c++/13.2.1/compare:
-/usr/include/c++/13.2.1/vector:
 /usr/include/c++/13.2.1/bits/allocator.h:
 /usr/include/c++/13.2.1/x86_64-pc-linux-gnu/bits/c++allocator.h:
 /usr/include/c++/13.2.1/bits/new_allocator.h:
 /usr/include/c++/13.2.1/new:
 /usr/include/c++/13.2.1/bits/exception.h:
-/usr/include/c++/13.2.1/bits/stl_construct.h:
-/usr/include/c++/13.2.1/bits/stl_uninitialized.h:
-/usr/include/c++/13.2.1/ext/alloc_traits.h:
-/usr/include/c++/13.2.1/bits/alloc_traits.h:
-/usr/include/c++/13.2.1/bits/stl_vector.h:
-/usr/include/c++/13.2.1/bits/stl_bvector.h:
-/usr/include/c++/13.2.1/bits/refwrap.h:
-/usr/include/c++/13.2.1/bits/invoke.h:
-/usr/include/c++/13.2.1/bits/stl_function.h:
-/usr/include/c++/13.2.1/backward/binders.h:
-/usr/include/c++/13.2.1/bits/vector.tcc:
-/usr/include/c++/13.2.1/bits/memory_resource.h:
-/usr/include/c++/13.2.1/bits/uses_allocator.h:
-/usr/include/c++/13.2.1/bits/uses_allocator_args.h:
-/usr/include/c++/13.2.1/tuple:
-../src/Shader.h:
-/usr/include/c++/13.2.1/string:
 /usr/include/c++/13.2.1/bits/localefwd.h:
 /usr/include/c++/13.2.1/x86_64-pc-linux-gnu/bits/c++locale.h:
 /usr/include/c++/13.2.1/clocale:
 /usr/include/locale.h:
 /usr/include/bits/locale.h:
+/usr/include/c++/13.2.1/iosfwd:
 /usr/include/c++/13.2.1/cctype:
 /usr/include/ctype.h:
+/usr/include/c++/13.2.1/bits/ostream_insert.h:
+/usr/include/c++/13.2.1/bits/cxxabi_forced.h:
+/usr/include/c++/13.2.1/bits/stl_function.h:
+/usr/include/c++/13.2.1/backward/binders.h:
+/usr/include/c++/13.2.1/bits/refwrap.h:
+/usr/include/c++/13.2.1/bits/invoke.h:
+/usr/include/c++/13.2.1/bits/range_access.h:
+/usr/include/c++/13.2.1/initializer_list:
 /usr/include/c++/13.2.1/bits/basic_string.h:
+/usr/include/c++/13.2.1/ext/alloc_traits.h:
+/usr/include/c++/13.2.1/bits/alloc_traits.h:
+/usr/include/c++/13.2.1/bits/stl_construct.h:
+/usr/include/c++/13.2.1/string_view:
+/usr/include/c++/13.2.1/bits/functional_hash.h:
+/usr/include/c++/13.2.1/bits/hash_bytes.h:
+/usr/include/c++/13.2.1/bits/string_view.tcc:
 /usr/include/c++/13.2.1/ext/string_conversions.h:
 /usr/include/c++/13.2.1/cstdlib:
 /usr/include/c++/13.2.1/cstdio:
@@ -759,6 +749,19 @@ obj/debug/main.o: ../src/main.cpp /usr/include/stdc-predef.h \
 /usr/include/bits/types/error_t.h:
 /usr/include/c++/13.2.1/bits/charconv.h:
 /usr/include/c++/13.2.1/bits/basic_string.tcc:
+/usr/include/c++/13.2.1/bits/memory_resource.h:
+/usr/include/c++/13.2.1/bits/uses_allocator.h:
+/usr/include/c++/13.2.1/bits/uses_allocator_args.h:
+/usr/include/c++/13.2.1/tuple:
+../src/constants.h:
+/usr/include/c++/13.2.1/array:
+/usr/include/c++/13.2.1/compare:
+/usr/include/c++/13.2.1/vector:
+/usr/include/c++/13.2.1/bits/stl_uninitialized.h:
+/usr/include/c++/13.2.1/bits/stl_vector.h:
+/usr/include/c++/13.2.1/bits/stl_bvector.h:
+/usr/include/c++/13.2.1/bits/vector.tcc:
+../src/Shader.h:
 ../src/Texture2D.h:
 ../src/debugger.h:
 ../libs/glad/include/glad/glad.h:

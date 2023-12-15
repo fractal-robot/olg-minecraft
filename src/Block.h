@@ -1,6 +1,7 @@
 #pragma once
 
 #include "blockEnum.h"
+#include <bitset>
 
 class Block {
 public:
@@ -13,6 +14,8 @@ public:
   blocksEnum getType() const;
   void setType(const blocksEnum block);
   void setType(const int block);
+
+  std::bitset<6> Context{};
 
 private:
   blocksEnum m_blockType;

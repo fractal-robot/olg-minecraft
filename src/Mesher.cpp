@@ -47,35 +47,51 @@ void Mesher::mesh(ChunckArray &chunck, std::vector<float> &vertices,
     for (std::size_t y{0}; y < constants::chunckSize; ++y) {
       for (std::size_t z{0}; z < constants::chunckSize; ++z) {
 
-        std::cout << x << ' ' << y << ' ' << z << '\n';
-
         if (!chunck[x][y][z].isActive()) {
           continue;
         }
 
+        if (x == 0)
+          chunck[x][y][z].setType(blocksEnum::magma);
+
+        if (y == 0)
+          chunck[x][y][z].setType(blocksEnum::redstone_block);
+
+        if (z == 0)
+          chunck[x][y][z].setType(blocksEnum::bedrock);
+
+        if (!chunck[x][y][z + 1].isActive())
+          chunck[x][y][z].Context.set(5);
+        if (!chunck[x][y][z - 1].isActive())
+          chunck[x][y][z].Context.set(4);
+
         // set block vertices
         for (std::size_t faceCounter{0}; faceCounter < 6; ++faceCounter) {
-          for (std::size_t vertexCounter{0}; vertexCounter < 4;
-               ++vertexCounter) {
-            vertices.push_back(
-                templateVertices[vertexCounter * 3 + faceCounter * 12] + x);
-            vertices.push_back(
-                templateVertices[vertexCounter * 3 + faceCounter * 12 + 1] + y);
-            vertices.push_back(
-                templateVertices[vertexCounter * 3 + faceCounter * 12 + 2] + z);
+          if (chunck[x][y][z].Context.test(5 - faceCounter)) {
+            for (std::size_t vertexCounter{0}; vertexCounter < 4;
+                 ++vertexCounter) {
+              vertices.push_back(
+                  templateVertices[vertexCounter * 3 + faceCounter * 12] + x);
+              vertices.push_back(
+                  templateVertices[vertexCounter * 3 + faceCounter * 12 + 1] +
+                  y);
+              vertices.push_back(
+                  templateVertices[vertexCounter * 3 + faceCounter * 12 + 2] +
+                  z);
 
-            std::size_t blockType =
-                static_cast<std::size_t>(chunck[x][y][z].getType());
+              std::size_t blockType =
+                  static_cast<std::size_t>(chunck[x][y][z].getType());
 
-            vertices.push_back(
-                blockVertex
-                    .blocksVertices[blockType][faceCounter][vertexCounter]
-                    .x);
+              vertices.push_back(
+                  blockVertex
+                      .blocksVertices[blockType][faceCounter][vertexCounter]
+                      .x);
 
-            vertices.push_back(
-                blockVertex
-                    .blocksVertices[blockType][faceCounter][vertexCounter]
-                    .y);
+              vertices.push_back(
+                  blockVertex
+                      .blocksVertices[blockType][faceCounter][vertexCounter]
+                      .y);
+            }
           }
         }
 
@@ -90,10 +106,4 @@ void Mesher::mesh(ChunckArray &chunck, std::vector<float> &vertices,
       }
     }
   }
-
-  /*
-    assert(std::size(vertices) <= constants::chunckSize * constants::chunckSize
-    * constants::chunckSize * 6 * 4 * 5); assert(std::size(indices) <=
-    constants::chunckSize * constants::chunckSize * constants::chunckSize * 36);
-  */
 }

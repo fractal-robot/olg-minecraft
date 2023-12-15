@@ -13,6 +13,11 @@
 
 Chunck::Chunck() {
 
+  m_vertices.reserve(constants::chunckSize * constants::chunckSize *
+                     constants::chunckSize * 6 * 4 * 5);
+  m_indices.reserve(constants::chunckSize * constants::chunckSize *
+                    constants::chunckSize * 36);
+
   update();
 
   glGenVertexArrays(1, &m_VAO);
@@ -39,8 +44,6 @@ Chunck::Chunck() {
   glBindVertexArray(0);
   glBindBuffer(GL_ARRAY_BUFFER, 0);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-
-  // print();
 }
 
 Chunck::~Chunck() {
