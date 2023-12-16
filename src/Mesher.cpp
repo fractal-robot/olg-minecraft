@@ -15,8 +15,6 @@ BlockGeneration blockVertex("../../res/textures/block_info.json");
 void Mesher::mesh(ChunckArray &chunck, std::vector<float> &vertices,
                   std::vector<unsigned int> &indices) {
 
-  blockVertex.print();
-
   std::array<unsigned int, 36> templateIndices = {// Front
                                                   0, 1, 2, 2, 3, 0,
                                                   // Back
@@ -60,10 +58,20 @@ void Mesher::mesh(ChunckArray &chunck, std::vector<float> &vertices,
         if (z == 0)
           chunck[x][y][z].setType(blocksEnum::bedrock);
 
-        if (!chunck[x][y][z + 1].isActive())
+        if (z + 1 == constants::chunckSize || !chunck[x][y][z + 1].isActive())
           chunck[x][y][z].Context.set(5);
-        if (!chunck[x][y][z - 1].isActive())
+        if (z == 0 || !chunck[x][y][z - 1].isActive())
           chunck[x][y][z].Context.set(4);
+
+        if (x == 0 || !chunck[x - 1][y][z].isActive())
+          chunck[x][y][z].Context.set(3);
+        if (x + 1 == constants::chunckSize || !chunck[x + 1][y][z].isActive())
+          chunck[x][y][z].Context.set(2);
+
+        if (y + 1 == constants::chunckSize || !chunck[x][y + 1][z].isActive())
+          chunck[x][y][z].Context.set(1);
+        if (y == 0 || !chunck[x][y - 1][z].isActive())
+          chunck[x][y][z].Context.set(0);
 
         // set block vertices
         for (std::size_t faceCounter{0}; faceCounter < 6; ++faceCounter) {

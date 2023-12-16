@@ -69,7 +69,7 @@ int main() {
   glClearColor(1, 1, 1, 1);
 
   glEnable(GL_DEPTH_TEST);
-  // glEnable(GL_CULL_FACE);
+  glEnable(GL_CULL_FACE);
   glEnable(GL_MULTISAMPLE);
 
   debugger::initDebugger();
