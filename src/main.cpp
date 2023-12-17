@@ -88,12 +88,12 @@ int main() {
   glm::mat4 projection{glm::perspective(
       glm::radians(45.0f),
       static_cast<float>(constants::windowWidth) / constants::windowHeight,
-      0.1f, static_cast<float>(constants::viewDistance))};
+      0.1f, static_cast<float>(constants::viewDistance) * 500)};
 
   shader.setMatrix4("projection", projection);
 
-  glm::mat4 model{glm::mat4(1.0f)};
-  shader.setMatrix4("model", model);
+  Chunck chunck1;
+  Chunck chunck2;
 
   World world;
 
@@ -105,15 +105,17 @@ int main() {
     processInput(window);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    world.draw();
+    world.reallocate(camera.position);
 
     for (const auto &e : world.world) {
-      model = glm::translate(model, glm::vec3(e.first.x, e.first.y, e.first.z));
+      glm::mat4 model{glm::mat4(1.0f)};
+      model =
+          glm::translate(model, glm::vec3(e.first.x * constants::chunckSize,
+                                          e.first.y * constants::chunckSize,
+                                          e.first.z * constants::chunckSize));
       shader.setMatrix4("model", model);
       e.second->render();
     }
-
-    world.reallocate(camera.position);
 
     view = camera.getViewMatrix();
     shader.setMatrix4("view", view);
