@@ -25,6 +25,8 @@ void World::draw() const {
 }
 
 void World::update(const glm::vec3 &pPos, Shader &shader) {
+  // using eucledian distance formula to determine if the chunck should be
+  // created/removed/rendered
 
   for (int x{-constants::viewDistance}; x < constants::viewDistance; ++x) {
     for (int z{-constants::viewDistance}; z < constants::viewDistance; ++z) {

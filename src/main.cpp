@@ -4,6 +4,7 @@
 #include "Camera.h"
 #include "Chunk.h"
 #include "ChunkManager.h"
+#include "PerlinNoise.h"
 #include "Shader.h"
 #include "Texture2D.h"
 #include "blockEnum.h"
@@ -16,7 +17,11 @@
 #include <iostream>
 #include <math.h>
 
+using HeightMap =
+    std::array<std::array<float, constants::chunkSize>, constants::chunkSize>;
+
 Camera camera;
+PerlinNoise noiser;
 
 float deltaTime = 0.0f;
 float lastFrame = 0.0f;
@@ -96,6 +101,16 @@ int main() {
   Chunk chunck2;
 
   World world;
+
+  HeightMap map = noiser.getNoise(400, 12);
+  int counter{0};
+
+  for (std::size_t x{0}; x < constants::chunkSize; ++x) {
+    for (std::size_t y{0}; y < constants::chunkSize; ++y) {
+      std::cout << map[x][y];
+    }
+    std::cout << '\n';
+  }
 
   while (!glfwWindowShouldClose(window)) {
     float currentFrame = glfwGetTime();

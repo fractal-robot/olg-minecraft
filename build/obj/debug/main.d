@@ -349,8 +349,8 @@ obj/debug/main.o: ../src/main.cpp /usr/include/stdc-predef.h \
  ../src/../libs/glm/gtx/hash.hpp \
  ../src/../libs/glm/gtx/../gtx/dual_quaternion.hpp \
  ../src/../libs/glm/gtx/../gtx/dual_quaternion.inl \
- ../src/../libs/glm/gtx/hash.inl ../src/Shader.h ../src/Texture2D.h \
- ../src/debugger.h ../libs/glad/include/glad/glad.h \
+ ../src/../libs/glm/gtx/hash.inl ../src/Shader.h ../src/PerlinNoise.h \
+ ../src/Texture2D.h ../src/debugger.h ../libs/glad/include/glad/glad.h \
  /usr/include/c++/13.2.1/iostream /usr/include/c++/13.2.1/ostream \
  /usr/include/c++/13.2.1/ios /usr/include/c++/13.2.1/exception \
  /usr/include/c++/13.2.1/bits/exception_ptr.h \
@@ -801,6 +801,7 @@ obj/debug/main.o: ../src/main.cpp /usr/include/stdc-predef.h \
 ../src/../libs/glm/gtx/../gtx/dual_quaternion.inl:
 ../src/../libs/glm/gtx/hash.inl:
 ../src/Shader.h:
+../src/PerlinNoise.h:
 ../src/Texture2D.h:
 ../src/debugger.h:
 ../libs/glad/include/glad/glad.h:

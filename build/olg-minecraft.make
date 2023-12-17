@@ -72,6 +72,7 @@ OBJECTS := \
 	$(OBJDIR)/Chunk.o \
 	$(OBJDIR)/ChunkManager.o \
 	$(OBJDIR)/Mesher.o \
+	$(OBJDIR)/PerlinNoise.o \
 	$(OBJDIR)/Shader.o \
 	$(OBJDIR)/Texture2D.o \
 	$(OBJDIR)/main.o \
@@ -152,6 +153,9 @@ $(OBJDIR)/ChunkManager.o: ../src/ChunkManager.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/Mesher.o: ../src/Mesher.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/PerlinNoise.o: ../src/PerlinNoise.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/Shader.o: ../src/Shader.cpp
