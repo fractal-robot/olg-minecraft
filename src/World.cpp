@@ -5,6 +5,7 @@
 #include <cmath>
 #include <cstddef>
 #include <iostream>
+#include <ostream>
 #include <valarray>
 
 World::World() {
@@ -33,20 +34,24 @@ void World::reallocate(const glm::vec3 &pPos) {
 
     for (const auto &e : world) {
       // eucledian distance formula
-      if (std::sqrt(std::pow(e.first.x * constants::chunckSize - pPos.x, 2) +
-                    std::pow(e.first.z * constants::chunckSize - pPos.z, 2)) <=
-          constants::viewDistance) {
-        if (world.find({e.first.x + 1, 0, e.first.z}) == world.end())
-          world[{e.first.x + 1, 0, e.first.z}] = new Chunck;
-        if (world.find({e.first.x - 1, 0, e.first.z}) == world.end())
-          world[{e.first.x - 1, 0, e.first.z}] = new Chunck;
-        if (world.find({e.first.x, 0, e.first.z + 1}) == world.end())
-          world[{e.first.x, 0, e.first.z + 1}] = new Chunck;
-        if (world.find({e.first.x, 0, e.first.z - 1}) == world.end())
-          world[{e.first.x, 0, e.first.z - 1}] = new Chunck;
-      } else {
-        delete e.second;
-        world.erase(e.first);
+      //
+
+      for (std::size_t x{0}; x < constants::viewDistance; ++x) {
+        for (std::size_t z{0}; z < constants::viewDistance; ++z) {
+          if (std::sqrt(std::pow(x * constants::chunckSize - pPos.x, 2) +
+                        std::pow(z * constants::chunckSize - pPos.z, 2)) <=
+              constants::viewDistance) {
+            if (world.find({x, 0, z}) == world.end())
+              world[{x, 0, z}] = new Chunck;
+            if (world.find({-x, 0, z}) == world.end())
+              world[{-x, 0, z}] = new Chunck;
+            if (world.find({-x, 0, -z}) == world.end())
+              world[{-x, 0, -z}] = new Chunck;
+            if (world.find({x, 0, -z}) == world.end())
+              world[{x, 0, -z}] = new Chunck;
+          } else {
+          }
+        }
       }
     }
   }
