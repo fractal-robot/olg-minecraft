@@ -273,7 +273,7 @@ obj/debug/main.o: ../src/main.cpp /usr/include/stdc-predef.h \
  ../src/../libs/glm/detail/setup.hpp \
  ../src/../libs/glm/detail/type_half.inl ../src/../libs/glm/integer.hpp \
  ../src/../libs/glm/detail/func_integer.inl /usr/include/GLFW/glfw3.h \
- ../src/Chunck.h ../src/Block.h ../src/blockEnum.h \
+ ../src/Chunk.h ../src/Block.h ../src/blockEnum.h \
  /usr/include/c++/13.2.1/bitset /usr/include/c++/13.2.1/string \
  /usr/include/c++/13.2.1/bits/stringfwd.h \
  /usr/include/c++/13.2.1/bits/memoryfwd.h \
@@ -330,8 +330,8 @@ obj/debug/main.o: ../src/main.cpp /usr/include/stdc-predef.h \
  /usr/include/c++/13.2.1/bits/stl_uninitialized.h \
  /usr/include/c++/13.2.1/bits/stl_vector.h \
  /usr/include/c++/13.2.1/bits/stl_bvector.h \
- /usr/include/c++/13.2.1/bits/vector.tcc ../src/Shader.h \
- ../src/Texture2D.h ../src/World.h /usr/include/c++/13.2.1/functional \
+ /usr/include/c++/13.2.1/bits/vector.tcc ../src/ChunkManager.h \
+ /usr/include/c++/13.2.1/functional \
  /usr/include/c++/13.2.1/bits/std_function.h \
  /usr/include/c++/13.2.1/typeinfo /usr/include/c++/13.2.1/unordered_map \
  /usr/include/c++/13.2.1/bits/unordered_map.h \
@@ -349,10 +349,10 @@ obj/debug/main.o: ../src/main.cpp /usr/include/stdc-predef.h \
  ../src/../libs/glm/gtx/hash.hpp \
  ../src/../libs/glm/gtx/../gtx/dual_quaternion.hpp \
  ../src/../libs/glm/gtx/../gtx/dual_quaternion.inl \
- ../src/../libs/glm/gtx/hash.inl ../src/debugger.h \
- ../libs/glad/include/glad/glad.h /usr/include/c++/13.2.1/iostream \
- /usr/include/c++/13.2.1/ostream /usr/include/c++/13.2.1/ios \
- /usr/include/c++/13.2.1/exception \
+ ../src/../libs/glm/gtx/hash.inl ../src/Shader.h ../src/Texture2D.h \
+ ../src/debugger.h ../libs/glad/include/glad/glad.h \
+ /usr/include/c++/13.2.1/iostream /usr/include/c++/13.2.1/ostream \
+ /usr/include/c++/13.2.1/ios /usr/include/c++/13.2.1/exception \
  /usr/include/c++/13.2.1/bits/exception_ptr.h \
  /usr/include/c++/13.2.1/bits/cxxabi_init_exception.h \
  /usr/include/c++/13.2.1/bits/nested_exception.h \
@@ -702,7 +702,7 @@ obj/debug/main.o: ../src/main.cpp /usr/include/stdc-predef.h \
 ../src/../libs/glm/integer.hpp:
 ../src/../libs/glm/detail/func_integer.inl:
 /usr/include/GLFW/glfw3.h:
-../src/Chunck.h:
+../src/Chunk.h:
 ../src/Block.h:
 ../src/blockEnum.h:
 /usr/include/c++/13.2.1/bitset:
@@ -779,9 +779,7 @@ obj/debug/main.o: ../src/main.cpp /usr/include/stdc-predef.h \
 /usr/include/c++/13.2.1/bits/stl_vector.h:
 /usr/include/c++/13.2.1/bits/stl_bvector.h:
 /usr/include/c++/13.2.1/bits/vector.tcc:
-../src/Shader.h:
-../src/Texture2D.h:
-../src/World.h:
+../src/ChunkManager.h:
 /usr/include/c++/13.2.1/functional:
 /usr/include/c++/13.2.1/bits/std_function.h:
 /usr/include/c++/13.2.1/typeinfo:
@@ -802,6 +800,8 @@ obj/debug/main.o: ../src/main.cpp /usr/include/stdc-predef.h \
 ../src/../libs/glm/gtx/../gtx/dual_quaternion.hpp:
 ../src/../libs/glm/gtx/../gtx/dual_quaternion.inl:
 ../src/../libs/glm/gtx/hash.inl:
+../src/Shader.h:
+../src/Texture2D.h:
 ../src/debugger.h:
 ../libs/glad/include/glad/glad.h:
 /usr/include/c++/13.2.1/iostream:

@@ -12,7 +12,7 @@
 
 BlockGeneration blockVertex("../../res/textures/block_info.json");
 
-void Mesher::mesh(ChunckArray &chunck, std::vector<float> &vertices,
+void Mesher::mesh(ChunkArray &chunk, std::vector<float> &vertices,
                   std::vector<unsigned int> &indices) {
 
   //     .+------+
@@ -49,42 +49,42 @@ void Mesher::mesh(ChunckArray &chunck, std::vector<float> &vertices,
 
   std::size_t indicesCounter{0};
 
-  for (std::size_t x{0}; x < constants::chunckSize; ++x) {
-    for (std::size_t y{0}; y < constants::chunckSize; ++y) {
-      for (std::size_t z{0}; z < constants::chunckSize; ++z) {
+  for (std::size_t x{0}; x < constants::chunkSize; ++x) {
+    for (std::size_t y{0}; y < constants::chunkSize; ++y) {
+      for (std::size_t z{0}; z < constants::chunkSize; ++z) {
 
-        if (!chunck[x][y][z].active) {
+        if (!chunk[x][y][z].active) {
           continue;
         }
 
         if (x == 0)
-          chunck[x][y][z].type = blocksEnum::magma;
+          chunk[x][y][z].type = blocksEnum::magma;
 
         if (y == 0)
-          chunck[x][y][z].type = blocksEnum::redstone_block;
+          chunk[x][y][z].type = blocksEnum::redstone_block;
 
         if (z == 0)
-          chunck[x][y][z].type = blocksEnum::bedrock;
+          chunk[x][y][z].type = blocksEnum::bedrock;
 
         // cull hidden faces
-        if (z + 1 == constants::chunckSize || !chunck[x][y][z + 1].active)
-          chunck[x][y][z].context.set(5);
-        if (z == 0 || !chunck[x][y][z - 1].active)
-          chunck[x][y][z].context.set(4);
+        if (z + 1 == constants::chunkSize || !chunk[x][y][z + 1].active)
+          chunk[x][y][z].context.set(5);
+        if (z == 0 || !chunk[x][y][z - 1].active)
+          chunk[x][y][z].context.set(4);
 
-        if (x == 0 || !chunck[x - 1][y][z].active)
-          chunck[x][y][z].context.set(3);
-        if (x + 1 == constants::chunckSize || !chunck[x + 1][y][z].active)
-          chunck[x][y][z].context.set(2);
+        if (x == 0 || !chunk[x - 1][y][z].active)
+          chunk[x][y][z].context.set(3);
+        if (x + 1 == constants::chunkSize || !chunk[x + 1][y][z].active)
+          chunk[x][y][z].context.set(2);
 
-        if (y + 1 == constants::chunckSize || !chunck[x][y + 1][z].active)
-          chunck[x][y][z].context.set(1);
-        if (y == 0 || !chunck[x][y - 1][z].active)
-          chunck[x][y][z].context.set(0);
+        if (y + 1 == constants::chunkSize || !chunk[x][y + 1][z].active)
+          chunk[x][y][z].context.set(1);
+        if (y == 0 || !chunk[x][y - 1][z].active)
+          chunk[x][y][z].context.set(0);
 
         // set block vertices
         for (std::size_t faceCounter{0}; faceCounter < 6; ++faceCounter) {
-          if (chunck[x][y][z].context.test(5 - faceCounter)) {
+          if (chunk[x][y][z].context.test(5 - faceCounter)) {
             for (std::size_t vertexCounter{0}; vertexCounter < 4;
                  ++vertexCounter) {
               vertices.push_back(
@@ -97,7 +97,7 @@ void Mesher::mesh(ChunckArray &chunck, std::vector<float> &vertices,
                   z);
 
               std::size_t blockType =
-                  static_cast<std::size_t>(chunck[x][y][z].type);
+                  static_cast<std::size_t>(chunk[x][y][z].type);
 
               vertices.push_back(
                   blockVertex

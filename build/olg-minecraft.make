@@ -69,11 +69,11 @@ OBJECTS := \
 	$(OBJDIR)/glm.o \
 	$(OBJDIR)/BlockGeneration.o \
 	$(OBJDIR)/Camera.o \
-	$(OBJDIR)/Chunck.o \
+	$(OBJDIR)/Chunk.o \
+	$(OBJDIR)/ChunkManager.o \
 	$(OBJDIR)/Mesher.o \
 	$(OBJDIR)/Shader.o \
 	$(OBJDIR)/Texture2D.o \
-	$(OBJDIR)/World.o \
 	$(OBJDIR)/main.o \
 
 RESOURCES := \
@@ -145,7 +145,10 @@ $(OBJDIR)/BlockGeneration.o: ../src/BlockGeneration.cpp
 $(OBJDIR)/Camera.o: ../src/Camera.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/Chunck.o: ../src/Chunck.cpp
+$(OBJDIR)/Chunk.o: ../src/Chunk.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ChunkManager.o: ../src/ChunkManager.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/Mesher.o: ../src/Mesher.cpp
@@ -155,9 +158,6 @@ $(OBJDIR)/Shader.o: ../src/Shader.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/Texture2D.o: ../src/Texture2D.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/World.o: ../src/World.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/main.o: ../src/main.cpp

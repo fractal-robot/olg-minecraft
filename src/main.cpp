@@ -2,10 +2,10 @@
 #include "../libs/glm/gtc/matrix_transform.hpp"
 #include "../libs/glm/gtc/type_ptr.hpp"
 #include "Camera.h"
-#include "Chunck.h"
+#include "Chunk.h"
+#include "ChunkManager.h"
 #include "Shader.h"
 #include "Texture2D.h"
-#include "World.h"
 #include "blockEnum.h"
 #include "constants.h"
 #include "debugger.h"
@@ -92,8 +92,8 @@ int main() {
 
   shader.setMatrix4("projection", projection);
 
-  Chunck chunck1;
-  Chunck chunck2;
+  Chunk chunck1;
+  Chunk chunck2;
 
   World world;
 
@@ -105,17 +105,7 @@ int main() {
     processInput(window);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    world.reallocate(camera.position);
-
-    for (const auto &e : world.world) {
-      glm::mat4 model{glm::mat4(1.0f)};
-      model =
-          glm::translate(model, glm::vec3(e.first.x * constants::chunckSize,
-                                          e.first.y * constants::chunckSize,
-                                          e.first.z * constants::chunckSize));
-      shader.setMatrix4("model", model);
-      e.second->render();
-    }
+    world.update(camera.position, shader);
 
     view = camera.getViewMatrix();
     shader.setMatrix4("view", view);

@@ -6,14 +6,14 @@
 #include <array>
 #include <vector>
 
-using ChunckArray = std::array<
-    std::array<std::array<Block, constants::chunckSize>, constants::chunckSize>,
-    constants::chunckSize>;
+using ChunkArray = std::array<
+    std::array<std::array<Block, constants::chunkSize>, constants::chunkSize>,
+    constants::chunkSize>;
 
 using BlocksTexVertices = std::vector<std::array<std::array<glm::vec2, 4>, 6>>;
 
 class Mesher {
 public:
-  static void mesh(ChunckArray &chunck, std::vector<float> &vertices,
+  static void mesh(ChunkArray &chunck, std::vector<float> &vertices,
                    std::vector<unsigned int> &indices);
 };
