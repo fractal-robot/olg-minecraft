@@ -5,6 +5,7 @@
 #include "Chunck.h"
 #include "Shader.h"
 #include "Texture2D.h"
+#include "World.h"
 #include "blockEnum.h"
 #include "constants.h"
 #include "debugger.h"
@@ -83,17 +84,18 @@ int main() {
   texture.bind();
   shader.setInt("tex", 0);
 
-  Chunck chunck;
-  chunck.update();
-  // chunck.print();
-
   glm::mat4 view;
   glm::mat4 projection{glm::perspective(
       glm::radians(45.0f),
       static_cast<float>(constants::windowWidth) / constants::windowHeight,
-      0.1f, 100.0f)};
+      0.1f, static_cast<float>(constants::viewDistance))};
 
   shader.setMatrix4("projection", projection);
+
+  glm::mat4 model{glm::mat4(1.0f)};
+  shader.setMatrix4("model", model);
+
+  World world;
 
   while (!glfwWindowShouldClose(window)) {
     float currentFrame = glfwGetTime();
@@ -103,13 +105,18 @@ int main() {
     processInput(window);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+    world.draw();
+
+    for (const auto &e : world.world) {
+      model = glm::translate(model, glm::vec3(e.first.x, e.first.y, e.first.z));
+      shader.setMatrix4("model", model);
+      e.second->render();
+    }
+
+    world.reallocate(camera.position);
+
     view = camera.getViewMatrix();
     shader.setMatrix4("view", view);
-
-    glm::mat4 model{glm::mat4(1.0f)};
-    shader.setMatrix4("model", model);
-
-    chunck.render();
 
     glfwSwapBuffers(window);
     glfwPollEvents();

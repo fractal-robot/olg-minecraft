@@ -1,8 +1,10 @@
 #pragma once
 
 #include "Block.h"
+#include "blockEnum.h"
 #include "constants.h"
 #include <array>
+#include <bitset>
 #include <vector>
 
 class Chunck {
@@ -12,7 +14,6 @@ public:
 
   void update();
   void render() const;
-  void print() const;
 
 private:
   std::array<std::array<std::array<Block, constants::chunckSize>,

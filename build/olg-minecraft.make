@@ -67,13 +67,13 @@ endif
 OBJECTS := \
 	$(OBJDIR)/glad.o \
 	$(OBJDIR)/glm.o \
-	$(OBJDIR)/Block.o \
 	$(OBJDIR)/BlockGeneration.o \
 	$(OBJDIR)/Camera.o \
 	$(OBJDIR)/Chunck.o \
 	$(OBJDIR)/Mesher.o \
 	$(OBJDIR)/Shader.o \
 	$(OBJDIR)/Texture2D.o \
+	$(OBJDIR)/World.o \
 	$(OBJDIR)/main.o \
 
 RESOURCES := \
@@ -139,9 +139,6 @@ $(OBJDIR)/glad.o: ../libs/glad/src/glad.c
 $(OBJDIR)/glm.o: ../libs/glm/detail/glm.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/Block.o: ../src/Block.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/BlockGeneration.o: ../src/BlockGeneration.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
@@ -158,6 +155,9 @@ $(OBJDIR)/Shader.o: ../src/Shader.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/Texture2D.o: ../src/Texture2D.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/World.o: ../src/World.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/main.o: ../src/main.cpp

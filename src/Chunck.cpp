@@ -1,6 +1,5 @@
 #include "Chunck.h"
 #include "../libs/glad/include/glad/glad.h"
-#include "Block.h"
 #include "GLFW/glfw3.h"
 #include "Mesher.h"
 #include "constants.h"
@@ -12,7 +11,6 @@
 #include <iterator>
 
 Chunck::Chunck() {
-
   m_vertices.reserve(constants::chunckSize * constants::chunckSize *
                      constants::chunckSize * 6 * 4 * 5);
   m_indices.reserve(constants::chunckSize * constants::chunckSize *
@@ -57,26 +55,5 @@ void Chunck::update() { Mesher::mesh(m_chunck, m_vertices, m_indices); }
 void Chunck::render() const {
   glBindVertexArray(m_VAO);
   glDrawElements(GL_TRIANGLES, std::size(m_indices), GL_UNSIGNED_INT, 0);
-}
-
-void Chunck::print() const {
-  int counter{0};
-
-  for (auto v : m_indices) {
-    if (counter % 6 == 0 && counter != 0)
-      std::cout << "    " << counter / 5 << '\n';
-    std::cout << std::setw(7) << v << ' ';
-    ++counter;
-  }
-
-  std::cout << '\n' << '\n';
-  counter = 0;
-
-  for (auto v : m_vertices) {
-    if (counter % 5 == 0 && counter != 0)
-      std::cout << "    " << counter / 5 << '\n';
-
-    std::cout << std::setw(7) << v << ' ';
-    ++counter;
-  }
+  glBindVertexArray(0);
 }

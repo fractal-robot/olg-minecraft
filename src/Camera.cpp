@@ -5,8 +5,8 @@
 #include <GLFW/glfw3.h>
 
 Camera::Camera(glm::vec3 position, glm::vec3 up, float yaw, float pitch)
-    : m_position(position), m_front(glm::vec3(0.0f, 0.0f, -1.0f)),
-      m_worldUp(up), m_yaw(yaw), m_pitch(pitch) {
+    : position(position), m_front(glm::vec3(0.0f, 0.0f, -1.0f)), m_worldUp(up),
+      m_yaw(yaw), m_pitch(pitch) {
   updateCameraVectors();
 };
 
@@ -16,20 +16,20 @@ void Camera::processKeyboard(GLFWwindow *window, float deltaTime) {
   front = glm::normalize(front);
 
   if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-    m_position += constants::cameraSpeed * deltaTime * front;
+    position += constants::cameraSpeed * deltaTime * front;
   if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-    m_position -= constants::cameraSpeed * deltaTime * front;
+    position -= constants::cameraSpeed * deltaTime * front;
   if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-    m_position -= glm::normalize(glm::cross(front, m_up)) *
-                  constants::cameraSpeed * deltaTime;
+    position -= glm::normalize(glm::cross(front, m_up)) *
+                constants::cameraSpeed * deltaTime;
   if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-    m_position += glm::normalize(glm::cross(front, m_up)) *
-                  constants::cameraSpeed * deltaTime;
+    position += glm::normalize(glm::cross(front, m_up)) *
+                constants::cameraSpeed * deltaTime;
 
   if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
-    m_position.y += constants::cameraAltitudeSpeed * deltaTime;
+    position.y += constants::cameraAltitudeSpeed * deltaTime;
   if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
-    m_position.y -= constants::cameraAltitudeSpeed * deltaTime;
+    position.y -= constants::cameraAltitudeSpeed * deltaTime;
 }
 
 void Camera::processMouseMovement(float xPos, float yPos) {
@@ -54,7 +54,7 @@ void Camera::processMouseMovement(float xPos, float yPos) {
 }
 
 glm::mat4 Camera::getViewMatrix() const {
-  return glm::lookAt(m_position, m_position + m_front, m_up);
+  return glm::lookAt(position, position + m_front, m_up);
 }
 
 void Camera::updateCameraVectors() {
